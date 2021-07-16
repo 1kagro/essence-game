@@ -42,26 +42,27 @@ header {
 .imagen {
     object-fit: cover;
     height: 20rem;
-    width: 100%;
+    width: 70%;
 }
 
 .respuesta {
+    height: 30rem;
+    width: 70%;
+    background: rgb(47, 46, 48);
+    margin: auto;
     display: flex;
-    flex: 4 1 0%;
     flex-wrap: wrap;
-    height: 100%;
-    align-content: stretch;
-    z-index: 1;
+    justify-content: space-between;
 }
 
 .btn {
-    display: flex;
-    flex: 1 0 auto;
-    position: relative;
-    overflow: visible;
+    background: tomato;
+    flex: none;
+    width: calc((100% - 1rem) / 2);
+    margin-bottom: 1rem;
 
-    background-color: aliceblue;
-    width: 60%;
-    padding: 1rem;
-    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
 }
