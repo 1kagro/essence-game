@@ -176,8 +176,8 @@ function oprimir_btn_Cat(i) {
                     }
                 }*/
                 btn_fig_correspondiente[i].style.background = "lightgreen"
-                btn_fig_correspondiente[1].style.background = "pink"
-                btn_fig_correspondiente[2].style.background = "pink"
+                //btn_fig_correspondiente[1].style.background = "pink"
+                //btn_fig_correspondiente[2].style.background = "pink"
             } else {
                 btn_fig_correspondiente[i].style.background = "pink"
             }
@@ -195,8 +195,8 @@ function oprimir_btn_Cat(i) {
                     }
                 } */
                 btn_fig_correspondiente[i].style.background = "lightgreen"
-                btn_fig_correspondiente[0].style.background = "pink"
-                btn_fig_correspondiente[2].style.background = "pink"
+                //btn_fig_correspondiente[0].style.background = "pink"
+                //btn_fig_correspondiente[2].style.background = "pink"
             } else {
                 btn_fig_correspondiente[i].style.background = "pink"
             }
@@ -214,8 +214,8 @@ function oprimir_btn_Cat(i) {
                     }
                 } */
                 btn_fig_correspondiente[i].style.background = "lightgreen"
-                btn_fig_correspondiente[0].style.background = "pink"
-                btn_fig_correspondiente[1].style.background = "pink"
+                //btn_fig_correspondiente[0].style.background = "pink"
+                //btn_fig_correspondiente[1].style.background = "pink"
             } else {
                 btn_fig_correspondiente[i].style.background = "pink"
             }
