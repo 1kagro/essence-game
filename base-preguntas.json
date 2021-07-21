@@ -1,11 +1,39 @@
 [
     {
         "categoria": "Cliente",
+        "categoria1": "Solucion",
+        "categoria2": "Esfuerzo",
         "descripcion": "Lo que el sistema de software debe hacer para tratar la oportunidad y satisfacer a los interesados",
         "respuesta": "Alfa",
         "incorrecta": "Espacio de actividad",
         "incorrecta2": "Competencia",
         "incorrecta3": "Actividad",
-        "imagen": "https://i.ibb.co/g6PSDsg/error404.jpg"
+        "imagen": "https://i.ibb.co/g6PSDsg/error404.jpg",
+        "objectFit": "cover"
+    },
+    {
+        "categoria": "Solucion",
+        "categoria1": "Cliente",
+        "categoria2": "Esfuerzo",
+        "descripcion": "Pregunta2",
+        "respuesta": "Alfa",
+        "incorrecta": "Espacio de actividad",
+        "incorrecta2": "Competencia",
+        "incorrecta3": "Actividad",
+        "imagen": "https://i.ibb.co/g6PSDsg/error404.jpg",
+        "btn-img": "",
+        "objectFit": "cover"
+    },
+    {
+        "categoria": "Esfuerzo",
+        "categoria1": "Solucion",
+        "categoria2": "Cliente",
+        "descripcion": "pregunta3",
+        "respuesta": "Alfa",
+        "incorrecta": "Espacio de actividad",
+        "incorrecta2": "Competencia",
+        "incorrecta3": "Actividad",
+        "imagen": "https://i.ibb.co/g6PSDsg/error404.jpg",
+        "objectFit": "cover"
     }
 ]

@@ -41,13 +41,49 @@ header {
 }
 
 .imagen {
-    object-fit: cover;
     height: 20rem;
     width: 70%;
 }
 .imagen img {
+    object-fit: cover;
     width: 50%;
-    height: 50%;
+    height: 100%;
+}
+
+.cat {
+    height: 10rem;
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.btn-cat {
+    background: whitesmoke;
+    flex: none;
+    width: calc((100% - 3rem) / 4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.btn-cat:hover {
+    cursor: pointer;
+}
+
+#btn-cat1:hover {
+    background: #27ae60;
+}
+
+#btn-cat2:hover {
+    background: #f1c40f;
+}
+
+#btn-cat3:hover {
+    background: #7ed6df;
 }
 
 .respuesta {
@@ -75,6 +111,7 @@ header {
 .btn:hover {
     background: #c7ecee;
     cursor: pointer;
+    transform: scale(1.05);
 }
 figure {
     height: 4rem;
