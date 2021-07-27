@@ -47,8 +47,8 @@ function escogerPregunta(n) {
     desordenarRespuestas(pregunta)
     if (pregunta.imagen) {
         select_id("imagen").setAttribute("src", pregunta.imagen)
-        style("imagen").height = "200px"
-        style("imagen").width = "100%"
+        style("imagen").height = "20rem"
+        style("imagen").width = "70%"
     } else {
         style("image").height = "0px"
         style("image").width = "0px"
