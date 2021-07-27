@@ -4,4 +4,4 @@
 
 # Editor.md
 
-Este prototipo de pagina web ha sido realizado con la finalidad de que los estudiantes logren afianzar los conocimientos de la asignatura y puedan identificar los mismos
+Este prototipo de pagina web ha sido realizado con la finalidad de que los estudiantes logren afianzar los conocimientos del lenguaje de la escencia y de la asignatura y puedan identificar los mismos
