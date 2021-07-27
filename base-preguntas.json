@@ -8,19 +8,19 @@
         "incorrecta": "Espacio de actividad",
         "incorrecta2": "Competencia",
         "incorrecta3": "Actividad",
-        "imagen": "https://i.ibb.co/g6PSDsg/error404.jpg",
+        "imagen": "https://i.ibb.co/NSRvMy1/Cliente.jpg",
         "objectFit": "cover"
     },
     {
         "categoria": "Solucion",
         "categoria1": "Cliente",
         "categoria2": "Esfuerzo",
-        "descripcion": "Pregunta2",
+        "descripcion": "Esto es la Pregunta numero 2",
         "respuesta": "Alfa",
         "incorrecta": "Espacio de actividad",
         "incorrecta2": "Competencia",
         "incorrecta3": "Actividad",
-        "imagen": "https://i.ibb.co/g6PSDsg/error404.jpg",
+        "imagen": "https://i.ibb.co/NSRvMy1/Cliente.jpg",
         "btn-img": "",
         "objectFit": "cover"
     },
@@ -28,12 +28,12 @@
         "categoria": "Esfuerzo",
         "categoria1": "Solucion",
         "categoria2": "Cliente",
-        "descripcion": "pregunta3",
+        "descripcion": "Esto es la pregunta número 3",
         "respuesta": "Alfa",
         "incorrecta": "Espacio de actividad",
         "incorrecta2": "Competencia",
         "incorrecta3": "Actividad",
-        "imagen": "https://i.ibb.co/g6PSDsg/error404.jpg",
+        "imagen": "https://i.ibb.co/NSRvMy1/Cliente.jpg",
         "objectFit": "cover"
     }
 ]
