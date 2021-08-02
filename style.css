@@ -1,12 +1,176 @@
+/* importing google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: all 0.3s;
+    /* transition: all 0.3s;*/
 }
 html {
     font-size: 62.5%;
 }
+
+/*.main-new_mode {
+    display: none;
+}*/
+.container-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.container-buttons .btn_set {
+    margin-right: 1.5rem;
+}
+
+.container-buttons .btn_set:last-child {
+    margin-right: 0;
+}
+/*set game mode*/
+.set-game_mode header {
+    background: #34ACE0;
+    color: white;
+    min-width: 30rem;
+    width: 100%;
+    padding: 1rem;
+}
+/*Quitar container*/
+.container-buttons,
+.info-box_ruleta,
+.container,
+.main-new_mode,
+.result_box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0rem 0.4rem 0.8rem 0 rgba(0, 0, 0, 0.2),
+                0rem 0.6rem 2rem 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.3s ease;
+}
+
+.info-box_ruleta.activeInfo,
+.main-new_mode.activeNewMode {
+    z-index: 0.5;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.quiz-box {
+    display: none;
+}
+
+.container-buttons button {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #227093;
+    padding: 1.5rem 3rem;
+    outline: none;
+    border-radius: 0.5rem;
+    background: #fff;
+    cursor: pointer;    
+}
+
+.info-box_ruleta {
+    width: 54rem;
+    background: #fff;
+    border-radius: 0.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.info-box_ruleta .info_title {
+    height: 6rem;
+    width: 100%;
+    border-bottom: 0.1rem solid lightgray;
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.info-box_ruleta .info_list {
+    padding: 1.5rem 3.5rem;
+}
+
+.info-box_ruleta .info_list .info {
+    margin: 0.5rem 0;
+    font-size: 1.7rem;
+}
+
+.info-box_ruleta .info_list .info span {
+    font-weight: 600;
+    color: #227093;
+}
+
+.info-box_ruleta .buttons {
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 3.5rem;
+    border-top: 0.1rem solid lightgray;
+}
+
+.info-box_ruleta .buttons button {
+    margin: 0 0.5rem;
+    height: 4rem;
+    width: 10rem;
+    outline: none;
+    border: 0.1rem solid #227093;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.buttons button.restart {
+    color: #fff;
+    background: #227093;
+}
+
+.buttons button.restart:hover {
+    background: #34ACE0;
+}
+
+.buttons button.quit {
+    color: #227093;
+}
+
+.buttons button.quit:hover {
+    color: #fff;
+    background: #227093;
+}
+
+.quiz-box {
+    width: 55rem;
+    background: #fff;
+    border-radius: 0.5rem;
+}
+
+.quiz-box header {
+    color: black;
+    height: 7rem;
+    padding: 0 3rem;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.5rem 0.5rem 0 0;
+    box-shadow: 0rem 0.3rem 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
+}
+
+
+
+/*footer .total_que {
+    padding: 1rem;
+    color: white;
+}*/
 
 body {
     background-color: #227093;
@@ -15,6 +179,7 @@ body {
     font-size: 3rem;
 }
 
+/*NEW MODE*/
 .container {
     width: 100vw;
     height: 100vh;
@@ -22,33 +187,192 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(1.1);
 }
-
-header {
+/*
+.container header {
+    margin-top: 7rem;
     background: #34ACE0;
     color: white;
     min-width: 30rem;
     width: 70%;
     padding: 1rem;
+}*/
+
+.container header {
+    margin-top: 7rem;
+    color: whitesmoke;
+    width: 70%;
+    height: 14%;
+    padding: 0 3rem;
+    background: #34ACE0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.5rem 0.5rem 0 0;
+    box-shadow: 0rem 0.3rem 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
+    user-select: none;
 }
 
+.container header .title {
+    font-size: 2rem;
+    font-weight: 600;
+    user-select: none;
+}
+
+.container header .timer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 14.5rem;
+    height: 4.5rem;
+    background: #cce5ff;
+    border: 0.1rem solid #b8daff;
+    border-radius: 0.5rem;
+    padding: 0 0.8rem;
+}
+
+.container header .timer .time_tex {
+    color: black;
+    font-weight: 400;
+    font-size: 1.7rem;
+    user-select: none;
+}
+
+.container header .timer .timer_sec {
+    font-size: 1.8rem;
+    font-weight: 500;
+    background: #343a40;
+    height: 3rem;
+    width: 4.5rem;
+    color: #fff;
+    text-align: center;
+    line-height: 3rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #343a40;
+    user-select: none;
+}
+
+.container footer {
+    height: 6rem;
+    width: 100%;
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container footer .total_que span{
+    display: flex;
+    user-select: none;
+}
+
+footer .total_que span p {
+    font-weight: 500;
+    padding: 0 0.5rem;
+}
+
+.total_que span p:first-child {
+    padding-left: 0rem;
+}
+
+footer .next_btn {
+    height: 4rem;
+    padding: 0 1.3rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    color: #227093;
+    background: #fff;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+footer .next_btn:hover {
+    color: #fff;
+    background: #227093;
+}
+
+.result_box {
+    background: #fff;
+    width: 45rem;
+    padding: 2.5rem 3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.result_box .icon {
+    font-size: 10rem;
+    color: #227093;
+    margin-bottom: 1rem;
+}
+
+.result_box .complete_text {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.result_box .score_text span {
+    display: flex;
+    margin: 1rem 0;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.score_text span p {
+    font-weight: 600;
+    padding: 0 0.4rem;
+}
+
+.result_box .buttons {
+    display: flex;
+    margin: 2rem 0;
+}
+
+.result_box .buttons button {
+    margin: 0 1rem;
+    height: 4rem;
+    padding: 0 2rem;
+    border: none;
+    outline: none;
+    font-size: 1.8rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #227093;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+/*
 .categoria {
     opacity: 0.3;
     text-align: left;
-}
+} */
 
-.pregunta {
+/* .pregunta {
     padding: 1rem;
-}
+} */
 
 .imagen {
-    padding: 2rem;
-    height: 20rem;
+    margin: 1rem;
+    height: 30rem;
     /*width: 70%;*/
 }
 .imagen img {
     object-fit: cover;
-    width: 50%;
     height: 100%;
 }
 
@@ -70,10 +394,14 @@ header {
     justify-content: center;
     align-items: center;
     padding: 1rem 0;
+    border-radius: 0.2rem;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease;
 }
 
 .btn-cat:hover {
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 #btn-cat1:hover {
@@ -102,12 +430,13 @@ header {
     background: whitesmoke;
     flex: none;
     width: calc((100% - 1rem) / 2);
+    border-radius: 0.2rem;
+    padding: 0.8rem 1.5rem;
     margin-bottom: 1rem;
-    transition: all ease 0.5s;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 1rem 0;
+    justify-content: space-between;
+    transition: all 0.3s ease;
 }
 
 .btn:hover {
@@ -115,10 +444,10 @@ header {
     cursor: pointer;
     transform: scale(1.05);
 }
-figure {
+/* figure {
     height: 4rem;
 }
 figure img {
     width: 4rem;
     height: 4rem;
-}
+} */

@@ -6,16 +6,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego Semat</title>
     <link rel="stylesheet" href="./style.css">
+    <!-- FontAwesome CDN Link for Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
-    <div class="main">
-        <div class="container">
-            <header>
-                <div class="categoria" id="categoria">
-                    categoria
+    <div class="set-game_mode">
+        <header>
+            <h2>Set game mode</h2>
+        </header>
+        <main>
+            <div class="container-buttons">
+                <div class="btn_set"><button id="ruleta_btn">Ruleta</button></div>
+                <div class="btn_set"><button id="classic_btn">Classic</button></div>
+                <div class="btn_set"><button id="new_btn">New</button></div>
+            </div>
+            <!-- New mode info-->
+            <div class="info-box_ruleta" id="info-new">
+                <div class="info_title">
+                    <span>Some Rules of this Quiz</span>
                 </div>
-                <div class="pregunta" id="pregunta">
-                    Pregunta
+                <div class="info_list">
+                    <div class="info">1. You will have only <span>15 seconds</span></div>
+                    <div class="info">2. Once you select your answer</div>
+                    <div class="info">3. You can't seect any option</div>
+                    <div class="info">4. You can't exit from the</div>
+                    <div class="info">5. You'll get points on the EugenioJoto</div>
+                </div>
+                <div class="buttons">
+                    <button class="quit">Exit Quiz</button>
+                    <button class="restart">Continue</button>
+                </div>
+            </div>
+            <!-- Classic mode info-->
+            <div class="info-box_ruleta" id="info-classic">
+                <div class="info_title">
+                    <span>Some Rules of this Quiz</span>
+                </div>
+                <div class="info_list">
+                    <div class="info">1. You will have only <span>60 seconds</span></div>
+                    <div class="info">2. Once you select your answer</div>
+                    <div class="info">3. You can't seect any option</div>
+                    <div class="info">4. You can't exit from the</div>
+                    <div class="info">5. You'll get points on the EugenioJotisimo</div>
+                </div>
+                <div class="buttons">
+                    <button class="quit">Exit Quiz</button>
+                    <button class="restart">Continue</button>
+                </div>
+            </div>
+            <!-- Ruleta mode info-->
+            <div class="info-box_ruleta" id="info-ruleta">
+                <div class="info_title">
+                    <span>Some Rules of this Quiz</span>
+                </div>
+                <div class="info_list">
+                    <div class="info">1. You will have only fans</div>
+                    <div class="info">2. Once you select your answer</div>
+                    <div class="info">3. You can't seect any option</div>
+                    <div class="info">4. You can't exit from the</div>
+                    <div class="info">5. You'll get points on the EugenioJoto0</div>
+                </div>
+                <div class="buttons">
+                    <button class="quit">Exit Quiz</button>
+                    <button class="restart">Continue</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!--<div class="quiz-box">
+        <header>
+            <div class="title">Awesome Quiz Aplication</div>
+            <div class="timer">
+                <div class="time-tex">Time Left</div>
+                <div class="timer-sec">15</div>
+            </div>
+        </header>
+        <section>
+            <div class="que_text">
+                <span>What does HTML stand for?</span>
+            </div>
+            <div class="option_list">
+                <div class="option">
+                    <span>Hyper Text Preprocessor</span>
+                    <div class="icon"><i class="fas fa-check"></i></div>
+                </div>
+                <div class="option">
+                    <span>Hyper Text Preprocessor</span>
+                    <div class="icon"><i class="fas fa-times"></i></div>
+                </div>
+                <div class="option">
+                    <span>Hyper Text Preprocessor</span>
+                    <div class="icon"><i class="fas fa-check"></i></div>
+                </div>
+                <div class="option">
+                    <span>Hyper Text Preprocessor</span>
+                    <div class="icon"><i class="fas fa-check"></i></div>
+                </div>
+            </div>
+        </section>
+            Quiz Box Footer
+        <footer>
+            <div class="total_que" id="total_que">
+                <span><p>2</p>Of<p>5</p>Questions</span>
+            </div>
+            <button class="next_btn" onclick="next_btn()">Next Question</button>
+        </footer> -->
+    </div>
+    <div class="main-new_mode">
+        <div class="container">
+            <header id="header">
+                <div class="title" id="pregunta">Pregunta</div>
+                <div class="timer">
+                    <div class="time_tex">Time Left</div>
+                    <div class="timer_sec">15</div>
                 </div>
             </header>
             <div class="imagen">
@@ -34,30 +137,43 @@
             </div>
             <div class="respuesta" id="respuesta">
                 <div class="btn" id="btn1" onclick="oprimir_btn(0)">
-                    <div class="btn1-fig">
-                        <img src="#" alt="" id="btn1-fig">
-                    </div>
                     <span id="btn11">Alfa</span>
+                    <div class="btn1-fig"><img src="#" alt="" id="btn1-fig"></div>
                 </div>
                 <div class="btn" id="btn2" onclick="oprimir_btn(1)">
-                    <div class="btn2-fig">
-                        <img src="#" alt="" id="btn2-fig">
-                    </div>
                     <span id="btn22">Espacio de actividad</span>
+                    <div class="btn2-fig"><img src="#" alt="" id="btn2-fig"></div>
                 </div>
                 <div class="btn" id="btn3" onclick="oprimir_btn(2)">
-                    <div class="btn3-fig">
-                        <img src="#" alt="" id="btn3-fig">
-                    </div>
                     <span id ="btn33">Competencia</span>
+                    <div class="btn3-fig"><img src="#" alt="" id="btn3-fig"></div>
                 </div>
                 <div class="btn" id="btn4" onclick="oprimir_btn(3)">
-                    <div class="btn4-fig">
-                        <img src="#" alt="" id="btn4-fig">
-                    </div>
                     <span id="btn44">Actividad</span>
+                    <div class="btn4-fig"><img src="#" alt="" id="btn4-fig"></div>
                 </div>
             </div>
+            <footer>
+                <div class="total_que" id="total_que">
+                    <span><p>2</p>Of<p>5</p>Questions</span>
+                </div>
+                <button class="next_btn" onclick="next_btn()">Next Question</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Result Box -->
+    <div class="result_box">
+        <div class="icon">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="complete_text">Has completado el Quiz! :D</div>
+        <div class="score_text">
+            <span>and sorry, you got only <p>2</p> out of <p>5</p></span>
+        </div>
+        <div class="buttons">
+            <button class="restart">Replay Quiz</button>
+            <button class="quit">Quit Quiz</button>
         </div>
     </div>
 </body>

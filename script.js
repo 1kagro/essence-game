@@ -9,6 +9,68 @@ let pregunta
 let posibles_respuestas
 let posibles_categorias
 
+//Quiz_App
+const ruleta_btn = select_id("ruleta_btn");
+const classic_btn = select_id("classic_btn");
+const new_btn = select_id("new_btn");
+
+//const info_box_ruleta = select_class(".info-box_ruleta");
+
+const info_box_ruleta = select_id("info-ruleta")
+const info_box_classic = select_id("info-classic")
+const info_box_new = select_id("info-new")
+
+
+const exit_btn_ruleta = info_box_ruleta.querySelector(".buttons .quit");
+const continue_btn_ruleta = info_box_ruleta.querySelector(".buttons .restart")
+
+const exit_btn_classic = info_box_classic.querySelector(".buttons .quit");
+const continue_btn_classic = info_box_classic.querySelector(".buttons .restart")
+
+const exit_btn_new = info_box_new.querySelector(".buttons .quit");
+const continue_btn_new = info_box_new.querySelector(".buttons .restart");
+const new_mode_box = select_class(".main-new_mode");
+
+console.log(new_mode_box)
+// --------- Ruleta ---------
+
+//If ruleta button clicked
+ruleta_btn.onclick = () => {
+    info_box_ruleta.classList.add("activeInfo"); //show
+}
+//If Exit button clicked
+exit_btn_ruleta.onclick = () => {
+    info_box_ruleta.classList.remove("activeInfo"); //hide
+}
+
+// --------- Classic ---------
+
+//If classic button clicked
+classic_btn.onclick = () => {
+    info_box_classic.classList.add("activeInfo"); //show 
+}
+//If Exit button clicked
+exit_btn_classic.onclick = () => {
+    info_box_classic.classList.remove("activeInfo"); //hide
+}
+
+// --------- New ---------
+
+//If new button clicked
+new_btn.onclick = () => {
+    info_box_new.classList.add("activeInfo"); //show
+}
+//If Exit button clicked
+exit_btn_new.onclick = () => {
+    info_box_new.classList.remove("activeInfo"); //hide
+}
+//If Continue button clicked
+continue_btn_new.onclick = () => {
+    info_box_new.classList.remove("activeInfo"); //hide
+    new_mode_box.classList.add("activeNewMode"); // show the New mode
+}
+
+
 btn_correspondiente = [
   select_id("btn1"), select_id("btn2"),
   select_id("btn3"), select_id("btn4")
@@ -39,16 +101,22 @@ function escogerPreguntaAleatoria() {
 
 function escogerPregunta(n) {
     pregunta = interprete_bp[n]
-    select_id("categoria").innerHTML = pregunta.categoria
+    //select_id("categoria").innerHTML = pregunta.categoria
     select_id("pregunta").innerHTML = pregunta.descripcion
     select_id("imagen").setAttribute("src", pregunta.imagen)
     
+    let pc = preguntas_correctas
+    if(preguntas_hechas > 1) {
+        select_id("total_que").innerHTML = pc + " Of " + (preguntas_hechas-1)
+    }else{
+        select_id("total_que").innerHTML = ""
+    }
+
     style("imagen").objectFit = pregunta.objectFit;
     desordenarRespuestas(pregunta)
     if (pregunta.imagen) {
         select_id("imagen").setAttribute("src", pregunta.imagen)
-        style("imagen").height = "20rem"
-        style("imagen").width = "70%"
+        style("imagen").height = "30rem"
     } else {
         style("image").height = "0px"
         style("image").width = "0px"
@@ -110,6 +178,9 @@ function oprimir_btn(i) {
             break
         }
     }
+}
+
+function next_btn() {
     setTimeout(() => {
         reiniciar()
         suspender_botones = false
@@ -161,62 +232,25 @@ function oprimir_btn_Cat(i) {
         return
     }
     suspender_botones_cat = true
-    //if (posibles_categorias[0] == pregunta.categoria) {
         if (i == 0) {
             if (posibles_categorias[0] == pregunta.categoria && posibles_categorias[0] == "Cliente"){
-                /*for (let j = 0; j < 4; j++){
-                    if (posibles_respuestas[j] == "Actividad") {
-                    select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/WyKcdr7/Actividad-C.png")
-                    } else if (posibles_respuestas[j] == "Alfa") {
-                        select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/6nzt4GX/AlfaC.png")
-                    } else if (posibles_respuestas[j] == "Competencia"){
-                        select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/tzFgTG8/Competencia-C.png")
-                    } else if (posibles_respuestas[j] == "Espacio de actividad") {
-                        select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/M5L34JK/EspacioC.png")
-                    }
-                }*/
                 btn_fig_correspondiente[i].style.background = "lightgreen"
-                //btn_fig_correspondiente[1].style.background = "pink"
-                //btn_fig_correspondiente[2].style.background = "pink"
             } else {
+                preguntas_correctas--
                 btn_fig_correspondiente[i].style.background = "pink"
             }
         } else if (i == 1) {
             if (posibles_categorias[0] == pregunta.categoria && posibles_categorias[0] == "Solucion") {
-                /* for (let j = 0; j < 4; j++){
-                    if (posibles_respuestas[j] == "Actividad") {
-                    select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/jVfdPMF/Actividad-S.png")
-                    } else if (posibles_respuestas[j] == "Alfa") {
-                        select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/zfzBhyx/AlfaS.png")
-                    } else if (posibles_respuestas[j] == "Competencia"){
-                        select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/2yBK7ck/Competencia-S.png")
-                    } else if (posibles_respuestas[j] == "Espacio de actividad") {
-                        select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/Gtc0K7K/EspacioS.png")
-                    }
-                } */
                 btn_fig_correspondiente[i].style.background = "lightgreen"
-                //btn_fig_correspondiente[0].style.background = "pink"
-                //btn_fig_correspondiente[2].style.background = "pink"
             } else {
+                preguntas_correctas--
                 btn_fig_correspondiente[i].style.background = "pink"
             }
         } else if (i == 2) {
             if (posibles_categorias[0] == pregunta.categoria && posibles_categorias[0] == "Esfuerzo") {
-                /* for (let j = 0; j < 4; j++){
-                    if (posibles_respuestas[j] == "Actividad") {
-                    select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/kBwNc0m/Actividad-E.png")
-                    } else if (posibles_respuestas[j] == "Alfa") {
-                        select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/kBwNc0m/Actividad-E.png")
-                    } else if (posibles_respuestas[j] == "Competencia"){
-                        select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/5kysHC5/Competencia-E.png")
-                    } else if (posibles_respuestas[j] == "Espacio de actividad") {
-                        select_id(btn_fig[j]).setAttribute("src", "https://i.ibb.co/P58CQH4/EspacioE.png")
-                    }
-                } */
                 btn_fig_correspondiente[i].style.background = "lightgreen"
-                //btn_fig_correspondiente[0].style.background = "pink"
-                //btn_fig_correspondiente[1].style.background = "pink"
             } else {
+                preguntas_correctas--
                 btn_fig_correspondiente[i].style.background = "pink"
             }
         }
@@ -224,28 +258,27 @@ function oprimir_btn_Cat(i) {
             if (pregunta.categoria == "Cliente") {
                 btn_fig_correspondiente[0].style.background = "lightgreen"
                 img_btn(0)
-                //btn_fig_correspondiente[1].style.background = "pink"
-                //btn_fig_correspondiente[2].style.background = "pink"
                 break
             } else if (pregunta.categoria == "Solucion") {
                 btn_fig_correspondiente[1].style.background = "lightgreen"
                 img_btn(1)
-                //btn_fig_correspondiente[0].style.background = "pink"
-                //btn_fig_correspondiente[2].style.background = "pink"
                 break
             } else if (pregunta.categoria == "Esfuerzo") {
                 btn_fig_correspondiente[2].style.background = "lightgreen"
                 img_btn(2)
-                //btn_fig_correspondiente[1].style.background = "pink"
-                //btn_fig_correspondiente[0].style.background = "pink"
                 break
             }
         }
         setTimeout(() => {
             suspender_botones_cat = false
+            select_id("cat").style.margin = "1.7rem"
+            select_id("cat").style.height = "7rem"
+            select_id("respuesta").style.marginTop = "2rem"
             select_id("respuesta").style.display = "flex"
+            style("header").height = "20%"
+            style("imagen").height = "23rem"
         }, 3000);
-    //}
+
     style("btn1-fig").height = "4rem"
     style("btn2-fig").height = "4rem"
     style("btn3-fig").height = "4rem"
@@ -259,12 +292,19 @@ function reiniciar() {
     for (const btn_cat of btn_correspondiente) {
         btn_cat.style.background = "whitesmoke"
     }
+    select_id("cat").style.margin = "auto"
+    select_id("cat").style.height = "10rem"
+    select_id("respuesta").style.marginTop = "auto"
     select_id("respuesta").style.display = "none"
     escogerPreguntaAleatoria()
 }
 
 function select_id(id) {
     return document.getElementById(id)
+}
+
+function select_class(clas) {
+    return document.querySelector(clas);
 }
 
 function style(id) {
