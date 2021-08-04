@@ -38,7 +38,6 @@ html {
 .container-buttons,
 .info-box_ruleta,
 .container,
-.main-new_mode,
 .result_box {
     position: absolute;
     top: 50%;
@@ -50,11 +49,11 @@ html {
 }
 
 .info-box_ruleta.activeInfo,
-.main-new_mode.activeNewMode {
-    z-index: 0.5;
+.container.activeNewMode {
+    z-index: 5;
     opacity: 1;
     pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1.2);
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .quiz-box {
@@ -189,7 +188,7 @@ body {
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%) scale(1);
 }
 /*
 .container header {
@@ -255,6 +254,21 @@ body {
     user-select: none;
 }
 
+.container header .time_line {
+    position: absolute;
+    top: 23%;
+    left: 24rem;
+    height: 0.3rem;
+    width: 70%;
+    background: red;
+}
+    /*position: absolute;
+    top: 14%;
+    left: 24rem;
+    /* right: -82px; 
+    height: 0.3rem;
+    width: 70%;
+    background: red;*/
 .container footer {
     height: 6rem;
     width: 100%;
@@ -262,6 +276,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 1rem;
 }
 
 .container footer .total_que span{
@@ -355,6 +370,10 @@ footer .next_btn:hover {
     transition: all 0.3s ease;
 }
 
+.respuesta .btn.disable, .cat .btn-cat.disable{
+    pointer-events: none;
+}
+
 
 /*
 .categoria {
@@ -375,7 +394,6 @@ footer .next_btn:hover {
     object-fit: cover;
     height: 100%;
 }
-
 .cat {
     height: 10rem;
     width: 70%;
