@@ -4,8 +4,7 @@ $name= $_POST['nom'];
 $correo= $_POST['correo'];
 $user= $_POST['user'];
 $pass= $_POST['pass'];
-$pass = hash('sha512', $pass);
-
+$pass = password_hash(hash('sha512', $pass), PASSWORD_DEFAULT);
 
 $query = "INSERT INTO users(nom, correo, user, pass)
  VALUES ('$name','$correo','$user','$pass') ";
