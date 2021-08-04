@@ -38,6 +38,7 @@ const new_mode_box = document.querySelector(".container");
 
 const timeCount = new_mode_box.querySelector(".timer .timer_sec");
 const timeLine = new_mode_box.querySelector("header .time_line");
+const timeOff = new_mode_box.querySelector("header .time_tex");
 
 
 //console.log(new_mode_box)
@@ -84,8 +85,11 @@ continue_btn_new.onclick = () => {
 
 let que_count = 0;
 let counter;
+let counterLine;
 let timeValue = 15;
 let widthValue = 0;
+let userScore = 0.0;
+let times = 0;
 
 btn_correspondiente = [
   select_id("btn1"), select_id("btn2"),
@@ -179,6 +183,10 @@ function oprimir_btn(i) {
     suspender_botones = true
     if (posibles_respuestas[i] == pregunta.respuesta) {
         preguntas_correctas++
+        //userScore += 1;
+        userScore += (Math.floor((times/15) * 100) / 100) * 1000
+        console.log(times);
+        console.log(userScore);
         btn_correspondiente[i].style.background = "lightgreen"
     } else {
         btn_correspondiente[i].style.background = "pink"
@@ -191,17 +199,59 @@ function oprimir_btn(i) {
     }
     clearInterval(counter);
     clearInterval(counterLine);
-
     let allOptions = option_list.children.length;
     for (let i = 0; i < allOptions; i++) {
         option_list.children[i].classList.add("disable");
     }
+    next_btn.style.display = "block";
+}
+
+const next_btn = new_mode_box.querySelector(".next_btn");
+const result_box = select_class(".result_box");
+const restart_quiz = result_box.querySelector(".buttons .restart");
+const quit_quiz = result_box.querySelector(".buttons .quit");
+
+restart_quiz.onclick = () => {
+    new_mode_box.classList.add("activeNewMode");
+    result_box.classList.remove("activeResult");
+    preguntas_hechas = 0;
+    preguntas_correctas = 0;
+    let que_count = 0;
+    let timeValue = 15;
+    let widthValue = 0;
+    let userScore = 0.0;
+    let times = 0;
+
+    timeOff.textContent = "Time Left";
+    style("header").height = "14%"
+    style("time_line").top = "23%"
+    reiniciar();
+    clearInterval(counter);
+    startTimer(timeValue);
+    clearInterval(counterLine);
+    startTimerLine(widthValue);
+    suspender_botones = false
+    next_btn.style.display = "none";
+    
+    let allOptions = option_list.children.length;
+    for (let i = 0; i < allOptions; i++) {
+        option_list.children[i].classList.remove("disable");
+    }
+    let allOptions_cat = option_list_cat.children.length;
+    for (let i = 0; i < allOptions_cat; i++) {
+        option_list_cat.children[i].classList.remove("disable");
+    }
+}
+
+quit_quiz.onclick = () => {
+    window.location.reload();
 }
 
 // ----- Next Botton clicked -------
-function next_btn() {
+next_btn.onclick = () => {
     if(npreguntas.length != interprete_bp.length) {
         setTimeout(() => {
+            timeOff.textContent = "Time Left";
             style("header").height = "14%"
             style("time_line").top = "23%"
             reiniciar();
@@ -210,6 +260,7 @@ function next_btn() {
             clearInterval(counterLine);
             startTimerLine(widthValue);
             suspender_botones = false
+            next_btn.style.display = "none";
         }, 2000);
         let allOptions = option_list.children.length;
         for (let i = 0; i < allOptions; i++) {
@@ -222,7 +273,29 @@ function next_btn() {
     }else{
         preguntas_hechas++;
         preguntaHecha();
+        clearInterval(counter);
+        clearInterval(counterLine);
+        showResultBox();
         console.log("Questions Completed")
+    }
+}
+
+function showResultBox(){
+    info_box_new.classList.remove("activeInfo"); //hide
+    new_mode_box.classList.remove("activeNewMode"); // hide the New mode
+    result_box.classList.add("activeResult"); // show the result box
+    const scoreText = result_box.querySelector(".score_text");
+    if(preguntas_correctas > ((interprete_bp.length/2) + 1)) {
+        let scoreTag = '<span>and congrats! you got <p>' + p + '</p> out of <p>' + interprete_bp.length + '</p></span>' + '<span><p>Score: </p>' + userScore + '</span>';
+        scoreText.innerHTML = scoreTag;
+    }
+    else if(preguntas_correctas > 1) {
+        let scoreTag = '<span>and nice, you got <p>' + p + '</p> out of <p>' + interprete_bp.length + '</p></span>' + '<span><p>Score: </p>' + userScore + '</span>';
+        scoreText.innerHTML = scoreTag;
+    }
+    else {
+        let scoreTag = '<span>and sorry, you got only <p>' + p + '</p> out of <p>' + interprete_bp.length + '</p></span>' + '<span><p>Score: </p>' + userScore + '</span>';
+        scoreText.innerHTML = scoreTag;
     }
 }
 
@@ -232,6 +305,7 @@ function startTimer(time) {
     function timer() {
         timeCount.textContent = time;
         time--;
+        times = time;
         if(time < 9) {
             let addZero = timeCount.textContent;
             timeCount.textContent = "0" + addZero;
@@ -239,6 +313,55 @@ function startTimer(time) {
         if(time < 0) {
             clearInterval(counter);
             timeCount.textContent = "00";
+            timeOff.textContent = "Time Off";
+            times = 0;
+            //Escoger la categoria correcta automaticamente
+            for (let j = 0; j < 3; j++) {
+                if (pregunta.categoria == "Cliente") {
+                    btn_fig_correspondiente[0].style.background = "lightgreen"
+                    img_btn(0)
+                    break
+                } else if (pregunta.categoria == "Solucion") {
+                    btn_fig_correspondiente[1].style.background = "lightgreen"
+                    img_btn(1)
+                    break
+                } else if (pregunta.categoria == "Esfuerzo") {
+                    btn_fig_correspondiente[2].style.background = "lightgreen"
+                    img_btn(2)
+                    break
+                }
+            }
+            let allOptions_cat = option_list_cat.children.length;
+            for (let i = 0; i < allOptions_cat; i++) {
+                option_list_cat.children[i].classList.add("disable");
+            }
+            setTimeout(() => {
+                suspender_botones_cat = false
+                select_id("cat").style.margin = "1.7rem"
+                select_id("cat").style.height = "7rem"
+                select_id("respuesta").style.marginTop = "2rem"
+                select_id("respuesta").style.display = "flex"
+                style("header").height = "20.5%"
+                style("time_line").top = "21.5%"
+                style("imagen").height = "23rem"
+            }, 450);
+
+            style("btn1-fig").height = "4rem"
+            style("btn2-fig").height = "4rem"
+            style("btn3-fig").height = "4rem"
+            style("btn4-fig").height = "4rem"
+            //Escoger la opcion de respuesta corercta automaticamente
+            for (let j = 0; j < 4; j++) {
+                if (posibles_respuestas[j] == pregunta.respuesta) {
+                    btn_correspondiente[j].style.background = "lightgreen"
+                    break
+                }
+            }
+            let allOptions = option_list.children.length;
+            for (let i = 0; i < allOptions; i++) {
+                option_list.children[i].classList.add("disable");
+            }
+            next_btn.style.display = "block";
         }
     }
 }
@@ -253,7 +376,7 @@ function startTimerLine(time) {
         }
     }
 }
-
+let p = 0;
 // ---------- Preguntas hechas ---------------
 function preguntaHecha() {
     let pc = preguntas_correctas
@@ -261,7 +384,11 @@ function preguntaHecha() {
         if(pc < 0) {
             pc = 0;
         }
-        select_id("total_que").innerHTML = '<span><p>'+ pc +'</p>of<p>' + (preguntas_hechas-1) + '</p>Questions</span>'
+        if(userScore < 0) {
+            userScore = 0
+        }
+        p = pc;
+        select_id("total_que").innerHTML = '<span><p>'+ pc +'</p>of<p>' + (preguntas_hechas-1) + '</p>Correct questions</span>'
     }else{
         select_id("total_que").innerHTML = ""
     }
@@ -317,6 +444,7 @@ function oprimir_btn_Cat(i) {
             btn_fig_correspondiente[i].style.background = "lightgreen"
         } else {
             preguntas_correctas--
+            userScore -= (Math.floor((times/15) * 100) / 100) * 1000
             btn_fig_correspondiente[i].style.background = "pink"
         }
     } else if (i == 1) {
@@ -324,6 +452,7 @@ function oprimir_btn_Cat(i) {
             btn_fig_correspondiente[i].style.background = "lightgreen"
         } else {
             preguntas_correctas--
+            userScore -= (Math.floor((times/15) * 100) / 100) * 1000
             btn_fig_correspondiente[i].style.background = "pink"
         }
     } else if (i == 2) {
@@ -331,6 +460,7 @@ function oprimir_btn_Cat(i) {
             btn_fig_correspondiente[i].style.background = "lightgreen"
         } else {
             preguntas_correctas--
+            userScore -= (Math.floor((times/15) * 100) / 100) * 1000
             btn_fig_correspondiente[i].style.background = "pink"
         }
     }
@@ -359,8 +489,8 @@ function oprimir_btn_Cat(i) {
         select_id("cat").style.height = "7rem"
         select_id("respuesta").style.marginTop = "2rem"
         select_id("respuesta").style.display = "flex"
-        style("header").height = "20%"
-        style("time_line").top = "21%"
+        style("header").height = "20.5%"
+        style("time_line").top = "21.5%"
         style("imagen").height = "23rem"
     }, 450);
 
