@@ -28,12 +28,31 @@ html {
 }
 /*set game mode*/
 .set-game_mode header {
+    display: flex;
     background: #34ACE0;
     color: white;
     min-width: 30rem;
     width: 100%;
     padding: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+    align-content: flex-start;
 }
+.set-game_mode header button {
+    color: #227093;
+    padding: 1.5rem 3rem;
+    outline: none;
+    border-radius: 0.5rem;
+    background: #fff;
+    cursor: pointer;
+    margin-left: 29vw;
+}
+/* 
+.set-game_mode header .head {
+    display: flex;
+    align-content: center;
+    justify-content: flex-end;
+} */
 /*Quitar container*/
 .container-buttons,
 .info-box_ruleta,
