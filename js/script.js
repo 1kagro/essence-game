@@ -342,7 +342,7 @@ function startTimer(time) {
                 select_id("respuesta").style.marginTop = "2rem"
                 select_id("respuesta").style.display = "flex"
                 style("header").height = "20.5%"
-                style("time_line").top = "21.5%"
+                //style("time_line").top = "21.5%"
                 style("imagen").height = "23rem"
             }, 450);
 
@@ -366,16 +366,20 @@ function startTimer(time) {
     }
 }
 
+let view_width = select_id("time_line").clientWidth;
+
+//console.log("joto",view_width.clientWidth)
 function startTimerLine(time) {
-    counterLine = setInterval(timer, 14.9);
+    counterLine = setInterval(timer, 8.959);
     function timer() {
         time += 1;
         timeLine.style.width = time + "px";
-        if(time > 1119) {
+        if(time > (view_width-1)) {
             clearInterval(counterLine);
         }
     }
 }
+
 let p = 0;
 // ---------- Preguntas hechas ---------------
 function preguntaHecha() {
@@ -490,7 +494,7 @@ function oprimir_btn_Cat(i) {
         select_id("respuesta").style.marginTop = "2rem"
         select_id("respuesta").style.display = "flex"
         style("header").height = "20.5%"
-        style("time_line").top = "21.5%"
+        //style("time_line").top = "21.5%"
         style("imagen").height = "23rem"
     }, 450);
 
