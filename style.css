@@ -277,10 +277,11 @@ body {
 
 .container header .time_line {
     position: absolute;
-    top: 23%;
-    left: 24rem;
+    /* top: 23%;*/
+    left: 0rem; 
+    top: 0rem;
     height: 0.3rem;
-    width: 70%;
+    width: 100vw;
     background: red;
 }
     /*position: absolute;
