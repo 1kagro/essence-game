@@ -376,7 +376,6 @@ function startTimerLine(time) {
         timeLine.style.width = time + "px";
         if(time > (view_width-1)) {
             clearInterval(counterLine);
-            
         }
     }
 }
