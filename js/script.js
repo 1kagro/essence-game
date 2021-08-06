@@ -3,6 +3,7 @@ window.onload = function() {
     interprete_bp = JSON.parse(base_preguntas)
     escogerPreguntaAleatoria()
     select_id("respuesta").style.display = "none"
+    configurarJuego()
 }
 
 let pregunta
@@ -224,7 +225,7 @@ restart_quiz.onclick = () => {
 
     timeOff.textContent = "Time Left";
     style("header").height = "14%"
-    style("time_line").top = "23%"
+    //style("time_line").top = "23%"
     reiniciar();
     clearInterval(counter);
     startTimer(timeValue);
@@ -253,7 +254,7 @@ next_btn.onclick = () => {
         setTimeout(() => {
             timeOff.textContent = "Time Left";
             style("header").height = "14%"
-            style("time_line").top = "23%"
+            //style("time_line").top = "23%"
             reiniciar();
             clearInterval(counter);
             startTimer(timeValue);
@@ -368,15 +369,23 @@ function startTimer(time) {
 
 let view_width = select_id("time_line").clientWidth;
 
-//console.log("joto",view_width.clientWidth)
+console.log("joto",view_width)
 function startTimerLine(time) {
-    counterLine = setInterval(timer, 8.959);
+    counterLine = setInterval(timer, 10);
     function timer() {
         time += 1;
         timeLine.style.width = time + "px";
+        if(time > (view_width/2)){
+            timeLine.style.background = "#ffa801"
+        }
+        if(time > (view_width*0.8)) {
+            timeLine.style.background = "#ff793f"
+        }
+        if(time > (view_width*0.9)) {
+            timeLine.style.background = "red"
+        }
         if(time > (view_width-1)) {
             clearInterval(counterLine);
-            
         }
     }
 }
