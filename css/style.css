@@ -193,6 +193,7 @@ html {
 }*/
 
 body {
+    max-width: 1600px;
     background-color: #227093;
     text-align: center;
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif ;
@@ -222,7 +223,7 @@ body {
 }*/
 
 .container header {
-    margin-top: 7rem;
+    /* margin-top: 7rem; */
     color: whitesmoke;
     width: 70%;
     height: 14%;
@@ -278,11 +279,12 @@ body {
 .container header .time_line {
     position: absolute;
     /* top: 23%;*/
-    left: 0rem; 
+    left: 0rem;
+    /*right: 0rem;*/ 
     top: 0rem;
     height: 0.3rem;
     width: 100vw;
-    background: red;
+    background: #0be881;
 }
     /*position: absolute;
     top: 14%;
@@ -291,6 +293,14 @@ body {
     height: 0.3rem;
     width: 70%;
     background: red;*/
+
+.team {
+    opacity: 0.3;
+    text-align: left;
+    margin-top: 7rem;
+    width: 70%;
+}
+
 .container footer {
     height: 6rem;
     width: 100%;

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Semta Game</title>
+    <link rel="stylesheet" href="css/style_home.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+        
+    <script type="text/javascript">
+        function jugar() {
+            var equipos = document.getElementsByName("fields[]");
+            var nombres = [];
+            for (var i = 0; i < equipos.length; i++) {
+                nombres[i] = equipos[i].value;
+            }
+            console.log(nombres[1]);
+            console.log("Le dio al boton");
+            window.location.href = "pruebavisual2.html";
+        }
+
+
+        $(function () {
+            $(document).on('click', '.btn-add', function (e) {
+                e.preventDefault();
+
+                var controlForm = $('.controls form:first'),
+                    currentEntry = $(this).parents('.entry:first'),
+                    newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+                newEntry.find('input').val('');
+                controlForm.find('.entry:not(:last) .btn-add')
+                    .removeClass('btn-add').addClass('btn-remove')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('<span class="glyphicon glyphicon-minus"></span>');
+            }).on('click', '.btn-remove', function (e) {
+                $(this).parents('.entry:first').remove();
+
+                e.preventDefault();
+                return false;
+            });
+        });
+        </script>
+</head>
+
+<body>
+    <header>
+        <div class="local_time">Good morning</div>
+        <div class="option">
+            <p><a href="">Iniciar sesión</a></p>
+            <p><a href="">Crear cuenta</a></p>
+        </div>
+    </header>
+    <main>
+        <div class="row justify-content-md-center">
+            <section class="control-group" id="fields">
+                <h1>Creating Teams</h1>
+                <div class="controls">
+                    <form role="form" autocomplete="off">
+                        <div class="entry input-group">
+                            <input class="form-control" name="fields[]" type="text" placeholder="Nombre del equipo">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success btn-add" type="button">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+        <div class="row justify-content-md-center mt-2">
+            <button type="button" class="btn" onclick="guardarConfiguracion()">Game mode</button>
+        </div>
+    </main>
+</body>
+<script src="js/home.js"></script>
+</html>
