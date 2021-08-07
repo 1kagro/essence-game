@@ -1,3 +1,7 @@
+var globalVar = {
+	configuracion
+};
+
 function traerConceptos(){
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "/obtenerConceptos", false);
@@ -22,7 +26,8 @@ var funcionTemporizador;
 var temporizadorAlerta;
 var configuracion;
 var equipos_config;
-
+var hola = "h0la";
+var serializado;
 
 function generarConcepto(){
 
@@ -44,9 +49,8 @@ function generarConcepto(){
 	return concepto;
 }
 
-
 function guardarConfiguracion(){
-	var configuracion = {};
+	configuracion = {};
 	configuracion.equipos = [];
 	equipos = document.getElementsByName("fields[]");
 	jugadores = equipos.length;
@@ -57,36 +61,32 @@ function guardarConfiguracion(){
     	 	console.log("Valor equipos"+equipos[i].value);
     	 	console.log("Valor json"+configuracion.equipos[i]);
     }
-    console.log(configuracion);
-   	var serializado = JSON.stringify(configuracion);
-   	console.log(serializado);
-   	var envio = new XMLHttpRequest();
+   	serializado = JSON.stringify(configuracion);
+	console.log(serializado);
+	//configurarJuego();
+   	/* var envio = new XMLHttpRequest(); */
 	   
-   	envio.open("POST", "guardarConfiguracion", false);
-   	envio.send(serializado);
+   	/* envio.open("POST", "guardarConfiguracion", false);
+   	envio.send(serializado); */
    	/* var response = JSON.parse(envio.responseText);
 
    	console.log(response); */
     /* window.location.href = "index.php"; */
-	equipos_config = serializado;
-	//window.location.href = "index.html";
+	window.location.href = "index.html";
 }
-
-function configurarJuego () {
+function configurarJuego() {
 /* 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "/descargarConfiguracion", false);
 	xhr.send();
 	var respuesta = xhr.responseText;
 	console.log(respuesta); */
-	configuracion = equipos_config;
+	//configuracion = JSON.parse(serializado);
 	/* configuracion = JSON.parse(respuesta); */
-	console.log("Configuración:", configuracion);
-	jugadores = configuracion.equipos.length;
+	//jugadores = configuracion.equipos.length;
 /* 	contadorTemporizador = tiempoLimite/1000;
 	tiempoLimite = configuracion.tiempoLimite; */
-	console.log(jugadores);
 
-	var titulo = "";
+	/* var titulo = "";
 	var scores = "";
 
 	for (var i = 0; i < configuracion.equipos.length; i++) {
@@ -95,8 +95,8 @@ function configurarJuego () {
 	}
 
 	var contenido = '<thead class="thead-inverse"><tr><th colspan="'+configuracion.equipos.length+'">Puntaje</th></tr><tr>'+titulo+'</tr></thead><tr>'+scores+'</tr>';
-	document.getElementById("tablaPuntuaciones").innerHTML = contenido;
-	rellenarInfo();
+	document.getElementById("tablaPuntuaciones").innerHTML = contenido; */
+	//rellenarInfo();
 }
 
 function rellenarInfo(){

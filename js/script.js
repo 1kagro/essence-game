@@ -3,7 +3,7 @@ window.onload = function() {
     interprete_bp = JSON.parse(base_preguntas)
     escogerPreguntaAleatoria()
     select_id("respuesta").style.display = "none"
-    configurarJuego()
+    horaLocal();
 }
 
 let pregunta
@@ -20,6 +20,8 @@ const new_btn = select_id("new_btn");
 const info_box_ruleta = select_id("info-ruleta")
 const info_box_classic = select_id("info-classic")
 const info_box_new = select_id("info-new")
+
+const getHora = select_class(".local_time")
 
 const set_game_mode = select_class(".set-game_mode");
 
@@ -40,6 +42,10 @@ const new_mode_box = document.querySelector(".container");
 const timeCount = new_mode_box.querySelector(".timer .timer_sec");
 const timeLine = new_mode_box.querySelector("header .time_line");
 const timeOff = new_mode_box.querySelector("header .time_tex");
+
+let puntajes_a = []
+let preguntas_hechass = []
+let scores_a = []
 
 
 //console.log(new_mode_box)
@@ -82,8 +88,20 @@ continue_btn_new.onclick = () => {
     new_mode_box.classList.add("activeNewMode"); // show the New mode
     startTimer(15);
     startTimerLine(0);
+    console.log("Serial", serializado);
+    console.log("Configuracion", configuracion);
+    console.log("Jugadores", jugadores);
 }
 
+const team_box = select_class(".team-box");
+const set_game_btn = select_id("btn-Team");
+set_game_btn.onclick = () => {
+    set_game_mode.classList.add("activeSetMode");
+    team_box.style.display = "none";
+    document.styleSheets[2].disabled = true;
+    guardarConfiguracion();
+    //set_game_mode.style.display = "none"; //hide header set game mode
+}
 let que_count = 0;
 let counter;
 let counterLine;
@@ -101,7 +119,11 @@ npreguntas = []
 let preguntas_hechas = 0
 let preguntas_correctas = 0
 
+var titulo = "";
+var scores = "";
+
 function escogerPreguntaAleatoria() {
+    preguntas_correctas = 0;
     let n = Math.floor(Math.random() * interprete_bp.length)
 
     while (npreguntas.includes(n)) {
@@ -115,6 +137,18 @@ function escogerPreguntaAleatoria() {
     }
     npreguntas.push(n)
     preguntas_hechas++;
+    if(preguntas_hechass.length == 0){
+        preguntas_hechass.push(1);
+    }else{
+        preguntas_hechass[jugadaActual.jugador-1]++;
+    }
+    if(puntajes_a[jugadaActual.jugador-1] < 0) {
+        puntajes_a[jugadaActual.jugador-1] = 0;
+    }
+    if(scores_a[jugadaActual.jugador-1] < 0) {
+        scores_a[jugadaActual.jugador-1] = 0;
+    }
+
 
     escogerPregunta(n)
 }
@@ -183,7 +217,12 @@ function oprimir_btn(i) {
     }
     suspender_botones = true
     if (posibles_respuestas[i] == pregunta.respuesta) {
-        preguntas_correctas++
+        if(preguntas_correctas == 1){
+            puntajes_a[jugadaActual.jugador-1]++;
+            scores_a[jugadaActual.jugador-1] += (Math.floor((times/15) * 100) / 100) * 1000;
+        }
+        console.log("Jugada actual: ", jugadaActual.jugador-1)
+        console.log(puntajes_a, preguntas_hechass)
         //userScore += 1;
         userScore += (Math.floor((times/15) * 100) / 100) * 1000
         console.log(times);
@@ -215,13 +254,20 @@ const quit_quiz = result_box.querySelector(".buttons .quit");
 restart_quiz.onclick = () => {
     new_mode_box.classList.add("activeNewMode");
     result_box.classList.remove("activeResult");
-    preguntas_hechas = 0;
-    preguntas_correctas = 0;
+    let preguntas_hechas = 0;
+    let preguntas_hechass = []
+    let puntajes_a = []
+    let scores_a = []
+    let preguntas_correctas = 0;
     let que_count = 0;
     let timeValue = 15;
     let widthValue = 0;
     let userScore = 0.0;
     let times = 0;
+    var jugadorActual = 1;
+    var jugadaActual = {};
+    jugadaActual.jugador = 1;
+    //guardarConfiguracion();
 
     timeOff.textContent = "Time Left";
     style("header").height = "14%"
@@ -245,13 +291,15 @@ restart_quiz.onclick = () => {
 }
 
 quit_quiz.onclick = () => {
-    window.location.reload();
+    //location.reload(true);
+    window.location.href = window.location.href;
 }
 
 // ----- Next Botton clicked -------
 next_btn.onclick = () => {
     if(npreguntas.length != interprete_bp.length) {
         setTimeout(() => {
+            cambiarTurno();
             timeOff.textContent = "Time Left";
             style("header").height = "14%"
             //style("time_line").top = "23%"
@@ -263,6 +311,7 @@ next_btn.onclick = () => {
             suspender_botones = false
             next_btn.style.display = "none";
         }, 2000);
+        
         let allOptions = option_list.children.length;
         for (let i = 0; i < allOptions; i++) {
             option_list.children[i].classList.remove("disable");
@@ -272,12 +321,20 @@ next_btn.onclick = () => {
             option_list_cat.children[i].classList.remove("disable");
         }
     }else{
-        preguntas_hechas++;
+        //preguntas_hechas++;
+        //preguntas_hechass[jugadaActual.jugador-1]++;
         preguntaHecha();
+        terminarJuego();
+        for (var i = 0; i < configuracion.equipos.length; i++) {
+            titulo = titulo + '<th>'+ configuracion.equipos[i] +'</th>';
+            scores = scores + '<td id="score'+(i+1)+'">' + puntajes_a[i] + '</td>';
+            console.log(titulo, " --- ",  scores)
+        }
+        console.log(puntajes_a, preguntas_hechass)
         clearInterval(counter);
         clearInterval(counterLine);
         showResultBox();
-        console.log("Questions Completed")
+        console.log("Questions Completed: ", preguntas_hechass)
     }
 }
 
@@ -285,8 +342,8 @@ function showResultBox(){
     info_box_new.classList.remove("activeInfo"); //hide
     new_mode_box.classList.remove("activeNewMode"); // hide the New mode
     result_box.classList.add("activeResult"); // show the result box
-    const scoreText = result_box.querySelector(".score_text");
-    if(preguntas_correctas > ((interprete_bp.length/2) + 1)) {
+    //const scoreText = result_box.querySelector(".score_text");
+    /* if(preguntas_correctas > ((interprete_bp.length/2) + 1)) {
         let scoreTag = '<span>and congrats! you got <p>' + p + '</p> out of <p>' + interprete_bp.length + '</p></span>' + '<span><p>Score: </p>' + userScore + '</span>';
         scoreText.innerHTML = scoreTag;
     }
@@ -297,7 +354,7 @@ function showResultBox(){
     else {
         let scoreTag = '<span>and sorry, you got only <p>' + p + '</p> out of <p>' + interprete_bp.length + '</p></span>' + '<span><p>Score: </p>' + userScore + '</span>';
         scoreText.innerHTML = scoreTag;
-    }
+    } */
 }
 
 // --------- Time Limited -------------
@@ -369,7 +426,6 @@ function startTimer(time) {
 
 let view_width = select_id("time_line").clientWidth;
 
-console.log("joto",view_width)
 function startTimerLine(time) {
     counterLine = setInterval(timer, 10);
     function timer() {
@@ -393,16 +449,19 @@ function startTimerLine(time) {
 let p = 0;
 // ---------- Preguntas hechas ---------------
 function preguntaHecha() {
-    let pc = preguntas_correctas
-    if(preguntas_hechas > 1) {
+    //let pc = preguntas_correctas
+    let pc = puntajes_a[jugadaActual.jugador-1];
+    if(preguntas_hechass[jugadaActual.jugador-1] > 1) {
         if(pc < 0) {
+            puntajes_a[jugadaActual.jugador-1] = 0;
             pc = 0;
         }
-        if(userScore < 0) {
+        if(scores_a[jugadaActual.jugador-1] < 0) {
             userScore = 0
+            scores_a[jugadaActual.jugador-1] = 0;
         }
         p = pc;
-        select_id("total_que").innerHTML = '<span><p>'+ pc +'</p>of<p>' + (preguntas_hechas-1) + '</p>Correct questions</span>'
+        select_id("total_que").innerHTML = '<span><p>'+ pc +'</p>of<p>' + (preguntas_hechass[jugadaActual.jugador-1]-1) + '</p>Correct questions</span>'
     }else{
         select_id("total_que").innerHTML = ""
     }
@@ -456,28 +515,32 @@ function oprimir_btn_Cat(i) {
     if (i == 0) {
         if (posibles_categorias[0] == pregunta.categoria && posibles_categorias[0] == "Cliente"){
             btn_fig_correspondiente[i].style.background = "lightgreen"
+            preguntas_correctas = 1;
         } else {
-            preguntas_correctas--
+            preguntas_correctas = 0;
             userScore -= (Math.floor((times/15) * 100) / 100) * 1000
             btn_fig_correspondiente[i].style.background = "pink"
         }
     } else if (i == 1) {
         if (posibles_categorias[0] == pregunta.categoria && posibles_categorias[0] == "Solucion") {
             btn_fig_correspondiente[i].style.background = "lightgreen"
+            preguntas_correctas = 1;
         } else {
-            preguntas_correctas--
+            preguntas_correctas = 0;
             userScore -= (Math.floor((times/15) * 100) / 100) * 1000
             btn_fig_correspondiente[i].style.background = "pink"
         }
     } else if (i == 2) {
         if (posibles_categorias[0] == pregunta.categoria && posibles_categorias[0] == "Esfuerzo") {
             btn_fig_correspondiente[i].style.background = "lightgreen"
+            preguntas_correctas = 1;
         } else {
-            preguntas_correctas--
+            preguntas_correctas = 0;
             userScore -= (Math.floor((times/15) * 100) / 100) * 1000
             btn_fig_correspondiente[i].style.background = "pink"
         }
     }
+    
     for (let j = 0; j < 3; j++) {
         if (pregunta.categoria == "Cliente") {
             btn_fig_correspondiente[0].style.background = "lightgreen"
@@ -549,4 +612,218 @@ function readText(ruta_local) {
         texto = xmlhttp.responseText;
     }
     return texto;
+}
+
+// ------ Hora actual -----
+function horaLocal(){
+    var hoy = new Date();
+    var hora = hoy.getHours();
+    if(hora > 0 && hora < 12){
+        getHora.innerHTML = "Buenos dias";
+    }else if (hora > 11 && hora < 19){
+        getHora.innerHTML = "Buenas tardes";
+    }else{
+        getHora.innerHTML = "Buenas noches";
+    }
+    console.log("Hora:", hora)
+}
+
+// crear equipos
+
+var tiempoLimite = timeValue;
+var jugadores;
+var equipos;
+var jugadorActual = 1;
+var jugadaActual = {};
+jugadaActual.jugador = 1;
+var timer;
+var contadorTemporizador;
+var funcionTemporizador;
+var temporizadorAlerta;
+var configuracion;
+var equipos_config;
+var serializado;
+
+function guardarConfiguracion(){
+	configuracion = {};
+	configuracion.equipos = [];
+	equipos = document.getElementsByName("fields[]");
+	jugadores = equipos.length;
+	/* configuracion.tiempoLimite = document.getElementById("inputTiempoLimite").value * 1000; */
+	console.log(equipos.length);
+	for (var i = 0; i < equipos.length; i++) {
+			configuracion.equipos.push(equipos[i].value);
+/*     	 	console.log("Valor equipos"+equipos[i].value);
+    	 	console.log("Valor json"+configuracion.equipos[i]); */
+    }
+   	serializado = JSON.stringify(configuracion);
+	/* console.log(serializado); */
+	configurarJuego();
+   	/* var envio = new XMLHttpRequest(); */
+	   
+   	/* envio.open("POST", "guardarConfiguracion", false);
+   	envio.send(serializado); */
+   	/* var response = JSON.parse(envio.responseText);
+
+   	console.log(response); */
+    /* window.location.href = "index.php"; */
+}
+function configurarJuego() {
+/* 	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "/descargarConfiguracion", false);
+	xhr.send();
+	var respuesta = xhr.responseText;
+	console.log(respuesta); */
+	configuracion = JSON.parse(serializado);
+	/* configuracion = JSON.parse(respuesta); */
+	jugadores = configuracion.equipos.length;
+    //console.log("Conf: ", configuracion, "JUG: ", jugadores)
+	tiempoLimite = 15;
+    rellenarInfo();
+    
+    for (let index = 0; index < jugadores; index++) {
+        if(preguntas_hechass.length < jugadores){
+            preguntas_hechass.push(0);
+        }
+        puntajes_a.push(0);
+        scores_a.push(0);
+        /* console.log(preguntas_hechass.length)
+        console.log("for: ", preguntas_hechass[index], puntajes_a[index]) */
+    }
+	/*
+    //contadorTemporizador = tiempoLimite/1000;
+
+
+
+	var contenido = '<thead class="thead-inverse"><tr><th colspan="'+configuracion.equipos.length+'">Puntaje</th></tr><tr>'+titulo+'</tr></thead><tr>'+scores+'</tr>';
+	document.getElementById("tablaPuntuaciones").innerHTML = contenido; */
+}
+
+function rellenarInfo(){
+/* 	clearInterval(funcionTemporizador);
+	clearTimeout(timer); */
+	/* var concepto = generarConcepto();
+	document.getElementById("nombreConcepto").innerHTML = concepto.nombre;
+	document.getElementById("descripcion").innerHTML = concepto.descripcion; */
+	document.getElementById("jugadorActual").innerHTML = "Equipo en turno: "+ configuracion.equipos[jugadaActual.jugador-1];
+	console.log(jugadores);
+	/* jugadaActual.numeroSeleccionado = concepto.id;
+	jugadaActual.tipoSeleccionado = concepto.tipo;
+	timer = setTimeout(cambiarTurno,tiempoLimite); */
+}
+
+function jugar(id){
+	var numeroBtnSeleccionado = id.substring(id.length-1, id.length);
+	var TipoSeleccionado = id.substring(id.length-2, id.length-1);
+	console.log("Categoria: "+ TipoSeleccionado);
+	console.log("#Boton: " +  numeroBtnSeleccionado);
+
+	if(numeroBtnSeleccionado == "5" &&
+		numeroBtnSeleccionado == jugadaActual.numeroSeleccionado){
+		document.getElementById("score"+jugadaActual.jugador).innerHTML = parseInt(document.getElementById("score"+jugadaActual.jugador).innerHTML)+1;
+		cambiarTurno();
+		rellenarInfo();
+		audioCorrecto();
+	} else if(TipoSeleccionado == jugadaActual.tipoSeleccionado
+				&& numeroBtnSeleccionado == jugadaActual.numeroSeleccionado){
+		document.getElementById("score"+jugadaActual.jugador).innerHTML = parseInt(document.getElementById("score"+jugadaActual.jugador).innerHTML)+1;
+		cambiarTurno();
+		rellenarInfo();
+		audioCorrecto();
+	}else {
+		rellenarInfo();
+		mostrarAlerta();
+		cambiarTurno();
+		audioIncorrecto();
+	}
+}
+
+function cambiarTurno(){
+/* 	clearInterval(funcionTemporizador);
+	clearTimeout(timer); */
+	jugadaActual.jugador++;
+	if(jugadaActual.jugador>jugadores){
+		jugadaActual.jugador = 1;
+	}
+	document.getElementById("jugadorActual").innerHTML = "Equipo en turno: " + configuracion.equipos[jugadaActual.jugador-1];
+	//temporizador = setInterval(temporizador,1000);
+/* 	timer = setTimeout(cambiarTurno,tiempoLimite); */
+}
+
+function terminarJuego() {
+
+	/* var puntajes = document.getElementById("tablaPuntuaciones").getElementsByTagName("td");
+	puntajes = [].slice.call(puntajes);
+	puntajes = puntajes.map(function (celda) {
+		return parseInt(celda.innerText);
+	}); */
+
+	//var maxPuntaje = puntajes.indexOf(Math.max.apply(null,puntajes));
+    var maxPuntaje = puntajes_a.indexOf(Math.max.apply(null, puntajes_a));
+    var maxScore = scores_a.indexOf(Math.max.apply(null, scores_a));
+
+	//var puntajesOrdenados = puntajes.slice();
+	var puntajesOrdenados = puntajes_a.slice();
+    var puntajesOrdenados = puntajesOrdenados.sort(function(a, b){return b - a;});
+    //var puntajesOrdenados = puntajesOrdenados.sort(function(a,b){return b - a;});
+
+    var puntajesScore = scores_a.slice();
+
+    var scoresOrdenados = scores_a.slice();
+    var scoresOrdenados = scoresOrdenados.sort(function(a, b){return b - a;});
+
+    var puntajes_orden = puntajes_a.slice();
+    var orden_puntajes = puntajes_a.slice();
+    var orden_puntajes = orden_puntajes.sort(function(a, b){return b - a;});
+
+    var nombreTeamGanador = configuracion.equipos[maxScore];
+	//var nombreTeamGanador = configuracion.equipos[maxPuntaje];
+	console.log(nombreTeamGanador);
+	document.getElementById("equipo-ganador").innerHTML = nombreTeamGanador;
+	document.getElementById("puntos-ganador").innerHTML = "con "+ Math.max.apply(null,scores_a) + " puntos";
+
+
+	var tabla = "<thead><tr><th>Nombre del equipp</th><th>Aciertos</th><th>Puntaje</th></tr></thead>";
+    console.log("Preguntas", puntajesOrdenados, "scores", scoresOrdenados)
+	/* for (var i = 0; i < puntajes_a.length; i++) {
+		tabla = tabla + "<tr><td>"+configuracion.equipos[puntajes_orden.indexOf(puntajesOrdenados[i])]+"</td><td>"+orden_puntajes[i]+"</td><td>" + scoresOrdenados[i] + "</td></tr>";
+        console.log("Equipo: ", configuracion.equipos[puntajes_orden.indexOf(puntajesOrdenados[i])]);
+        console.log(puntajesOrdenados, puntajes_orden);
+        puntajes_orden[puntajes_orden.indexOf(puntajesOrdenados[i])] = -1;
+    } */
+    for (var i = 0; i < puntajes_a.length; i++) {
+		tabla = tabla + "<tr><td>"+configuracion.equipos[puntajesScore.indexOf(scoresOrdenados[i])]+"</td><td>"+orden_puntajes[i]+"</td><td>" + scoresOrdenados[i] + "</td></tr>";
+        console.log("Equipo: ", configuracion.equipos[puntajesScore.indexOf(scoresOrdenados[i])]);
+        console.log(scoresOrdenados, puntajesScore);
+        puntajesScore[puntajesScore.indexOf(scoresOrdenados[i])] = -1;
+    }
+	document.getElementById("tablaResultados").innerHTML = tabla;
+
+}
+
+function audioCorrecto () {
+	document.getElementById("contenedorAlerta").innerHTML ='<div id="alerta" class="alert alert-success alert-dismissible fade show text-center" role="alert">Respuesta Correcta!</div>';
+	temporizadorAlerta = setTimeout(ocultarAlerta,1500);
+	document.getElementById("audioCorrecto").play();
+}
+
+function audioIncorrecto () {
+	document.getElementById("contenedorAlerta").innerHTML ='<div id="alerta" class="alert alert-danger alert-dismissible fade show text-center" role="alert">Respuesta Incorrecta!</div>';
+	temporizadorAlerta = setTimeout(ocultarAlerta,1500);
+	document.getElementById("audioIncorrecto").play();
+}
+
+function mostrarAlerta(){
+
+}
+
+function ocultarAlerta(){
+	$("#alerta").alert("close");
+	clearTimeout(temporizadorAlerta);
+}
+
+function puntajes(n_jugadores, arreglo){
+    for (let i = 0; i < n_jugadores.length; i++) {
+        arreglo.push(0);
+    }
 }

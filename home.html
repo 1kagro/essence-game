@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Semta Game</title>
-    <link rel="stylesheet" href="css/style_home.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
         integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -46,7 +46,6 @@
                     .html('<span class="glyphicon glyphicon-minus"></span>');
             }).on('click', '.btn-remove', function (e) {
                 $(this).parents('.entry:first').remove();
-
                 e.preventDefault();
                 return false;
             });
@@ -56,7 +55,7 @@
 
 <body>
     <header>
-        <div class="local_time">Good morning</div>
+        <div class="local_time"><!-- Good morning --></div>
         <div class="option">
             <p><a href="">Iniciar sesión</a></p>
             <p><a href="">Crear cuenta</a></p>
@@ -86,4 +85,5 @@
     </main>
 </body>
 <script src="js/home.js"></script>
+<script src="js/script.js"></script>
 </html>
