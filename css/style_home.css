@@ -28,7 +28,7 @@ body {
 
 }
 
-header {
+.header {
   display: flex !important;
   font-size: 2rem;
   align-items: center;
