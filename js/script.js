@@ -96,10 +96,22 @@ continue_btn_new.onclick = () => {
 const team_box = select_class(".team-box");
 const set_game_btn = select_id("btn-Team");
 set_game_btn.onclick = () => {
-    set_game_mode.classList.add("activeSetMode");
-    team_box.style.display = "none";
-    document.styleSheets[2].disabled = true;
-    guardarConfiguracion();
+    nombresEquipos = document.getElementsByName("fields[]");
+    check = true;
+    for (let i = 0; i < nombresEquipos.length; i++) {
+        if(nombresEquipos[i].value == ""){
+            check = false;
+            break;
+        }
+    }
+    if(check){
+        set_game_mode.classList.add("activeSetMode");
+        team_box.style.display = "none";
+        document.styleSheets[2].disabled = true;
+        guardarConfiguracion();
+    }else{
+        alert("Error, no puede dejar nombre(s) de equipo(s) en blanco :(");
+    }
     //set_game_mode.style.display = "none"; //hide header set game mode
 }
 let que_count = 0;
@@ -779,8 +791,8 @@ function terminarJuego() {
     var nombreTeamGanador = configuracion.equipos[maxScore];
 	//var nombreTeamGanador = configuracion.equipos[maxPuntaje];
 	console.log(nombreTeamGanador);
-	document.getElementById("equipo-ganador").innerHTML = nombreTeamGanador;
-	document.getElementById("puntos-ganador").innerHTML = "con "+ Math.max.apply(null,scores_a) + " puntos";
+	document.getElementById("equipo-ganador").innerHTML = "<h3>" + nombreTeamGanador + "</h3>";
+	document.getElementById("puntos-ganador").innerHTML = "<span>Es el equipo ganador con <p>" + Math.max.apply(null,scores_a) + "</p> puntos</span>";
 
 
 	var tabla = "<thead><tr><th>Nombre del equipp</th><th>Aciertos</th><th>Puntaje</th></tr></thead>";

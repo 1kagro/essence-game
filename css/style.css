@@ -431,6 +431,15 @@ tr:nth-child(even) {
 }
 tr:hover td{
     background-color: #2d98da;
+    color: white;
+}
+#puntos-ganador p {
+    display: inline;
+    color: darkcyan;
+    font-weight: 500;
+}
+#puntos-ganador {
+    margin-bottom: 1rem;
 }
 
 
