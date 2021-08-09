@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +9,11 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- FontAwesome CDN Link for Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    
+
     <!-- create Team -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" id="style2" />
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"
+        id="style2" />
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
         integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
@@ -20,18 +22,6 @@
         integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script>
     <script type="text/javascript">
-        function jugar() {
-            var equipos = document.getElementsByName("fields[]");
-            var nombres = [];
-            for (var i = 0; i < equipos.length; i++) {
-                nombres[i] = equipos[i].value;
-            }
-            console.log(nombres[1]);
-            console.log("Le dio al boton");
-            window.location.href = "pruebavisual2.html";
-        }
-
-
         $(function () {
             $(document).on('click', '.btn-add', function (e) {
                 e.preventDefault();
@@ -58,6 +48,7 @@
         }
     </script>
 </head>
+
 <body>
     <div class="set-game_mode">
         <header>
@@ -79,9 +70,12 @@
                 </div>
                 <div class="info_list">
                     <div class="info">1. Tienes solo <span>15 seconds</span> por pregunta</div>
-                    <div class="info">2. Obtendras puntos cada vez que aciertes una pregunta y dependiendo la rapidez que respondas </div>
-                    <div class="info">3. Si no respondes dentro del limite de tiempo obtendras <span>-10</span> puntos</span></div>
-                    <div class="info">4. Una vez inicies no puedes abandonar hasta haber completado todas las preguntas</div>
+                    <div class="info">2. Obtendras puntos cada vez que aciertes una pregunta y dependiendo la rapidez
+                        que respondas </div>
+                    <div class="info">3. Si no respondes dentro del limite de tiempo obtendras <span>-10</span>
+                        puntos</span></div>
+                    <div class="info">4. Una vez inicies no puedes abandonar hasta haber completado todas las preguntas
+                    </div>
                     <div class="info">5. Diviertete :D</div>
                 </div>
                 <div class="buttons">
@@ -199,7 +193,7 @@
                     <div class="btn2-fig"><img src="#" alt="" id="btn2-fig"></div>
                 </div>
                 <div class="btn" id="btn3" onclick="oprimir_btn(2)">
-                    <span id ="btn33">Competencia</span>
+                    <span id="btn33">Competencia</span>
                     <div class="btn3-fig"><img src="#" alt="" id="btn3-fig"></div>
                 </div>
                 <div class="btn" id="btn4" onclick="oprimir_btn(3)">
@@ -238,12 +232,48 @@
     <!-- Crear equipos -->
     <div class="team-box" id="team-box">
         <header class="headerTeam">
-            <div class="local_time"><!-- Good morning --></div>
-            <div class="option">
+            <div class="local_time">
+                <!-- Good morning -->
+            </div>
+            <!-- <div class="option">
                 <p><a href="">Iniciar sesión</a></p>
                 <p><a href="">Crear cuenta</a></p>
+            </div> -->
+            <div class="action">
+                <div class="profile">
+                    <img src="./images/user.png" alt="">
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li id="user">
+                            <img src="./images/user.gif" alt="">
+                            <div class="datos_user">
+                                <h3 id="username">Nombre</h3>
+                                <h3 id="email">correo@mail.com</h3>
+                            </div>
+                        </li>
+                        <li><img src="./images/edit.png" alt=""><a href="#" class="clave">Cambiar contraseña</a></li>
+                        <li><img src="./images/log-out.png" alt=""><a href="./php/logout.php">Cerrar sesion</a></li>
+                    </ul>
+                </div>
             </div>
         </header>
+        <div class="login-register" >
+            <!--Login-->
+            <form action="./php/change_pass.php" method="POST" class="formulario__login">
+                <h2>Cambiar contraseña</h2>
+                <input type="password" placeholder="Contrasena actual" name="passac" required>
+                <input type="password" placeholder="Contraseña nueva" name="passn" id="password" required>
+                <input type="password" placeholder="Confirmar contraseña" name="conpassn" id="password2" required>
+                <?php
+                    if(isset($claves)){
+                        echo $claves;
+                    }
+                ?>
+                <button class="aceptar">Aceptar</button>
+                <button class="cancelar">Cancelar</button>
+            </form>
+        </div>
         <main class="mainTeam">
             <div class="row justify-content-md-center">
                 <section class="control-group" id="fields">
@@ -251,7 +281,8 @@
                     <div class="controls">
                         <form role="form" autocomplete="off">
                             <div class="entry input-group">
-                                <input class="form-control" name="fields[]" type="text" placeholder="Nombre del equipo" required>
+                                <input class="form-control" name="fields[]" type="text" placeholder="Nombre del equipo"
+                                    required>
                                 <span class="input-group-btn">
                                     <button class="btn-Team btn-success btn-add" type="button">
                                         <span class="glyphicon glyphicon-plus"></span>

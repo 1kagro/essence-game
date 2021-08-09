@@ -1,9 +1,11 @@
 <?php
 include 'bd.php';
+
 $name= $_POST['nom'];
 $correo= $_POST['correo'];
 $user= $_POST['user'];
 $pass= $_POST['pass'];
+
 $pass = password_hash(hash('sha512', $pass), PASSWORD_DEFAULT);
 
 $query = "INSERT INTO users(nom, correo, user, pass)
