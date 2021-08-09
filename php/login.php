@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'bd.php';
 $correo= $_POST['correo'];
 
@@ -13,10 +12,10 @@ if (mysqli_num_rows($validar_login)>0) {
     $verify = hash('sha512', $pass);    
     if(password_verify($verify, $_pass)) {
         $_SESSION['user']=$correo;
-        header("location: ../index.html");
+        header("location: ../index.php");
         exit;
     }else{
-	header("location: ../index.php");
+	header("location: ../login.php");
         echo '
         <script>
         alert("usuario o contraseña incorrecta, veririfica los datos nuevamente");
@@ -25,7 +24,7 @@ if (mysqli_num_rows($validar_login)>0) {
         exit;
         }
 }else{
-    header("location: ../index.php");
+    header("location: ../login.php");
     echo '
     <script>
     alert("usuario inexistente, veririfica los datos nuevamente");

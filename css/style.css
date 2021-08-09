@@ -80,6 +80,7 @@ html {
     pointer-events: auto;
     display: block;
 }
+
 .quiz-box {
     display: none;
 }
@@ -566,7 +567,7 @@ figure img {
 }
 
 .headerTeam {
-  display: flex !important;
+  display: flex ;
   font-size: 2rem;
   align-items: center;
   justify-content: space-between;
@@ -584,6 +585,166 @@ figure img {
   margin: 1rem;
   text-decoration: none;
 }
+/* .headerTeam .option.activeOption {
+    display: none;
+} */
+
+/* --------- Dropdown ---------- */
+.action {
+    position: fixed;
+    top: 2rem;
+    right: 3rem;
+}
+.action .profile {
+    position: relative;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+.action .profile img {
+    width: 5rem;
+    height: 5rem;
+}
+.headerTeam .action .profile:hover {
+    cursor: pointer;
+}
+.action .menu {
+    position: absolute;
+    top: 12rem;
+    right: 0.5rem;
+    padding: 1rem 2rem;
+    background: #fff;
+    width: 27rem;
+    box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 1.5rem;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
+.action .menu.active {
+    top: 8rem;
+    visibility: visible;
+    opacity: 1;
+}
+.action .menu::before {
+    content: '';
+    position: absolute;
+    top: -1.5rem;
+    right: 1.8rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    background: #fff;
+    transform: rotate(45deg);
+}
+.action .menu ul li img {
+    width: 3rem;
+    height: 3rem;
+    max-width: 3rem;
+    margin-right: 1rem;
+    opacity: 0.5;
+    transition: 0.5s;
+}
+.action .menu h3 {
+    width: 100%;
+    text-align: left;
+    font-size: 1.8rem;
+    /* padding: 1rem 0; */
+    font-weight: 500;
+    color: #555;
+    line-height: 1.92rem;
+}
+.action .menu ul li {
+    list-style: none;
+    padding: 1rem 0;
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+}
+.action .menu ul li#user{
+    border-top: none;
+}
+h3#username {
+    color: black;
+}
+.action .menu ul li:hover img {
+    opacity: 0.2;
+}
+.action .menu ul li a {
+    display: inline-block;
+    text-decoration: none;
+    color: #555;
+    font-size: 1.8rem;
+    font-weight: 500;
+    transition: 0.5s;
+}
+.action .menu ul li:hover a {
+    color: #95afc0;
+}
+
+/* -------- Cambiar contraseña ---------- */
+.login-register {
+    display: none;
+    align-items: center;
+    width: 100%;
+    max-width: 80rem;
+    position: relative;
+    top: 15%;
+    left: 40%;
+    visibility: hidden;
+    opacity: 0;
+}
+.login-register.activeRegister {
+    transition: 0.5s;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+.login-register form {
+    width: 50%;
+    padding: 4rem 1rem;
+    background: #fff;
+    position: relative;
+    border-radius: 1.8rem;
+}
+.login-register form h2 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2d98da;
+}
+.login-register form input {
+    width: 70%;
+    margin-top: 3rem;
+    padding: 1rem;
+    border: none;
+    background: #F2F2F2;
+    font-size: 1.6rem;
+    outline: none;
+}
+.login-register form .document.password2group input#password2-incorrecto {
+    border: 3px solid #bb2929;
+}
+.login-register form .password2group input#password2-correcto {
+    border: 3px solid #0be881;
+}
+.login-register form button {
+    padding: 2rem 4rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    margin-top: 3rem;
+    border: none;
+    font-size: 1.4rem;
+    background: #2d98da;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    border-radius: 2rem;
+}
+
 .mainTeam {
   margin-top: 15%;
 }
@@ -599,6 +760,13 @@ figure img {
 } */
 .mainTeam, .row {
   width: 100vw;
+}
+.mainTeam.remove {
+    display: none;
+
+}
+.headerTeam.cursornone {
+    pointer-events: none;
 }
 .input-group {
   position: relative;
@@ -643,6 +811,16 @@ figure img {
   position: relative;
   font-size: 0;
   white-space: nowrap;
+}
+button#btn-Team {
+    cursor: pointer;
+}
+button#btn-Team:hover {
+    background: #495057;
+    color: white;
+}
+button.btn-Team.btn-success.btn-add:hover, button.btn-Team.btn-remove.btn-danger:hover {
+    cursor: pointer;
 }
 .input-group-btn,
 .input-group-addon {

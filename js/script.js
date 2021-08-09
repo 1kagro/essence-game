@@ -43,6 +43,7 @@ const timeCount = new_mode_box.querySelector(".timer .timer_sec");
 const timeLine = new_mode_box.querySelector("header .time_line");
 const timeOff = new_mode_box.querySelector("header .time_tex");
 
+
 let puntajes_a = []
 let preguntas_hechass = []
 let scores_a = []
@@ -839,3 +840,57 @@ function puntajes(n_jugadores, arreglo){
         arreglo.push(0);
     }
 }
+
+// ---------- Menu drowdown ---------------
+const profile = select_class(".profile");
+profile.onclick = () => {
+    const toggleMenu = select_class(".menu");
+    toggleMenu.classList.toggle('active');
+}
+
+// ---------- Cambiar clave ---------------
+
+
+const validarPassword = () => {
+    const inputPassword1 = select_id('password');
+    const inputPassword2 = select_id('password2');
+    
+    if(inputPassword1.value !== inputPassword2.value){
+        /* inputPassword2.classList.add('incorrecto');
+        inputPassword2.classList.remove('correcto'); */
+        return true;
+    }else{
+        /* document.getElementById('password2group').classList.remove('password2-incorrecto');
+        document.getElementById('password2group').classList.add('password2-correcto'); */
+        return false;
+    }
+}
+
+
+
+const clave = select_class(".clave");
+const box_team = select_class(".mainTeam");
+const headerTeam = select_class(".headerTeam");
+const password_box = select_class(".login-register");
+clave.onclick = () => {
+    box_team.classList.add("remove");
+    const toggleMenu = select_class(".menu");
+    toggleMenu.classList.toggle('active');
+    headerTeam.classList.add('cursornone')
+    password_box.classList.add('activeRegister');
+}
+const cancelar = select_class(".cancelar");
+cancelar.onclick = () => {
+    box_team.classList.remove("remove");
+    headerTeam.classList.remove("cursornone");
+    password_box.classList.remove("activeRegister")
+}
+/* const aceptar = select_class(".aceptar");
+aceptar.onclick = () => {
+    if(validarPassword) {
+        alert("Las contraseñas no coinciden, verifique e intentelo nuevamente");
+    }else{
+        //$error_login = "Las contraseñas no coinciden";
+        console.log('meh');
+    }
+} */
