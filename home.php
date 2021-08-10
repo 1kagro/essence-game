@@ -1,6 +1,13 @@
+<?php
+include_once './php/user.php';
+$user = new User();
+$userSession = $userSession->getCurrentUser();
+$user->setUser($userSession);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,12 +59,10 @@
 <body>
     <div class="set-game_mode">
         <header>
-            <h2>Set game mode</h2>
-            <button>Cerrar sesion</button>
-            <div class="head">
-            </div>
+            <h2>Establecer modo de juego</h2>
         </header>
         <main>
+            <div class="exit-set_game">Salir</div>
             <div class="container-buttons">
                 <div class="btn_set"><button id="ruleta_btn">Ruleta</button></div>
                 <div class="btn_set"><button id="classic_btn">Classic</button></div>
@@ -160,6 +165,7 @@
     </div>
     <div class="main-new_mode">
         <div class="container">
+            <div class="exit-set_game" id="exit-new_mode">Salir</div>
             <div class="team" id="jugadorActual"></div>
             <header id="header">
                 <div class="title" id="pregunta">Pregunta</div>
@@ -248,8 +254,8 @@
                         <li id="user">
                             <img src="./images/user.gif" alt="">
                             <div class="datos_user">
-                                <h3 id="username">Nombre</h3>
-                                <h3 id="email">correo@mail.com</h3>
+                                <h3 id="username"><?php echo $user->getNombre(); ?></h3>
+                                <h3 id="email"><?php echo $user->getCorreo(); ?></h3>
                             </div>
                         </li>
                         <li><img src="./images/edit.png" alt=""><a href="#" class="clave">Cambiar contraseña</a></li>
