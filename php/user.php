@@ -70,6 +70,31 @@ class User extends DB{
         return $this->nombre;
     }
 
+    public function setData($name, $correo, $user, $pass) {
+        $query = $this->connect()->prepare("INSERT INTO users(nom, correo, user, pass) VALUES (:nom,:correo,:user,:pass)");
+        $query->execute(['nom' => $name, 'correo' => $correo, 'user' => $user, 'pass' => $pass]);
+        return $query;
+    }
+
+    public function correoExist($correo) {
+        $query = $this->connect()->prepare("SELECT * FROM users WHERE correo= :correo");
+        $query->execute(['correo' => $correo]);
+        if($query->rowCount()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public function userOnlyExist($user) {
+        $query = $this->connect()->prepare("SELECT * FROM users WHERE user= :user");
+        $query->execute(['user' => $user]);
+        if($query->rowCount()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 
