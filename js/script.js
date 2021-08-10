@@ -894,3 +894,26 @@ aceptar.onclick = () => {
         console.log('meh');
     }
 } */
+
+const exit_set_game_mode = select_class(".exit-set_game");
+exit_set_game_mode.onclick = () => {
+    window.location.href = window.location.href
+}
+const exit_new_mode = select_id("exit-new_mode");
+exit_new_mode.onclick = () => {
+    preguntaHecha();
+    terminarJuego();
+    for (var i = 0; i < configuracion.equipos.length; i++) {
+        titulo = titulo + '<th>'+ configuracion.equipos[i] +'</th>';
+        scores = scores + '<td id="score'+(i+1)+'">' + puntajes_a[i] + '</td>';
+        console.log(titulo, " --- ",  scores)
+    }
+    console.log(puntajes_a, preguntas_hechass)
+    clearInterval(counter);
+    clearInterval(counterLine);
+    showResultBox();
+    /* set_game_mode.style.display = "flex"; //hide header set game mode
+    info_box_new.classList.remove("activeInfo"); //hide
+    new_mode_box.classList.remove("activeNewMode"); // show the New mode */
+    //window.location.href = "index.php";
+}

@@ -35,7 +35,7 @@ html {
     width: 100%;
     padding: 1rem;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     align-content: flex-start;
 }
 .set-game_mode header button {
@@ -79,6 +79,28 @@ html {
     opacity: 1;
     pointer-events: auto;
     display: block;
+}
+.exit-set_game {
+    position: absolute;
+    /* display: block; */
+    left: 3rem;
+    top: 1.9rem;
+    padding: 0.5rem;
+    background: white;
+    color: #227093;
+    font-size: 2rem;
+    height: 3.5rem;
+    width: 8rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+.exit-set_game:hover {
+    background: #555;
+    color: white;
+}
+.container-buttons button:hover {
+    background: #636e72;
+    color: white;
 }
 
 .quiz-box {
