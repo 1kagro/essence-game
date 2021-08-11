@@ -31,6 +31,8 @@ const option_list_cat = document.querySelector(".cat");
 
 const exit_btn_ruleta = info_box_ruleta.querySelector(".buttons .quit");
 const continue_btn_ruleta = info_box_ruleta.querySelector(".buttons .restart")
+const ruleta_mode_box = document.querySelector(".main-ruleta_mode");
+
 
 const exit_btn_classic = info_box_classic.querySelector(".buttons .quit");
 const continue_btn_classic = info_box_classic.querySelector(".buttons .restart")
@@ -60,6 +62,13 @@ ruleta_btn.onclick = () => {
 exit_btn_ruleta.onclick = () => {
     info_box_ruleta.classList.remove("activeInfo"); //hide
 }
+//If Continue button clicked
+continue_btn_ruleta.onclick = () => {
+    set_game_mode.style.display = "none";
+    info_box_ruleta.classList.remove("activeInfo");
+    ruleta_mode_box.classList.add("activeRuletaMode");
+}
+
 
 // --------- Classic ---------
 
@@ -260,6 +269,7 @@ function oprimir_btn(i) {
 }
 
 const next_btn = new_mode_box.querySelector(".next_btn");
+const next_ruleta = ruleta_mode_box.querySelector(".next_ruleta");
 const result_box = select_class(".result_box");
 const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
@@ -267,18 +277,18 @@ const quit_quiz = result_box.querySelector(".buttons .quit");
 restart_quiz.onclick = () => {
     new_mode_box.classList.add("activeNewMode");
     result_box.classList.remove("activeResult");
-    let preguntas_hechas = 0;
-    let preguntas_hechass = []
-    let puntajes_a = []
-    let scores_a = []
-    let preguntas_correctas = 0;
-    let que_count = 0;
-    let timeValue = 15;
-    let widthValue = 0;
-    let userScore = 0.0;
-    let times = 0;
-    var jugadorActual = 1;
-    var jugadaActual = {};
+    preguntas_hechas = 0;
+    preguntas_hechass = []
+    puntajes_a = []
+    scores_a = []
+    preguntas_correctas = 0;
+    que_count = 0;
+    timeValue = 15;
+    widthValue = 0;
+    userScore = 0.0;
+    times = 0;
+    jugadorActual = 1;
+    jugadaActual = {};
     jugadaActual.jugador = 1;
     //guardarConfiguracion();
 
@@ -292,7 +302,8 @@ restart_quiz.onclick = () => {
     startTimerLine(widthValue);
     suspender_botones = false
     next_btn.style.display = "none";
-    
+    next_ruleta.style.display = "none";
+
     let allOptions = option_list.children.length;
     for (let i = 0; i < allOptions; i++) {
         option_list.children[i].classList.remove("disable");

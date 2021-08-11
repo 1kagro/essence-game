@@ -79,8 +79,7 @@ $user->setUser($userSession);
                         que respondas </div>
                     <div class="info">3. Si no respondes dentro del limite de tiempo obtendras <span>-10</span>
                         puntos</span></div>
-                    <div class="info">4. Una vez inicies no puedes abandonar hasta haber completado todas las preguntas
-                    </div>
+                    <div class="info">4. Una vez inicies tienes la opcion de abandonar cuando quieras </div>
                     <div class="info">5. Diviertete :D</div>
                 </div>
                 <div class="buttons">
@@ -215,7 +214,22 @@ $user->setUser($userSession);
             </footer>
         </div>
     </div>
-
+    <div class="main-ruleta_mode">
+        <div class="container-ruleta">
+            <header class="header-ruleta">
+                <h1>Modo Ruleta</h1>
+            </header>
+            <div class="opciones-todas">
+                <canvas id="idcanvas"></canvas>
+            </div>
+            <footer>
+                <div class="total_que" id="total_que">
+                    <!-- <span><p>2</p>Of<p>5</p>Questions</span> -->
+                </div>
+                <button class="next_ruleta">Next Question</button>
+            </footer>
+        </div>
+    </div>
     <!-- Result Box -->
     <div class="result_box">
         <div class="icon">
