@@ -80,6 +80,7 @@ html {
     pointer-events: auto;
     display: block;
 }
+
 .exit-set_game {
     position: absolute;
     /* display: block; */
@@ -566,7 +567,7 @@ figure img {
 .set-game_mode {
     display: none;
     opacity: 0;
-    pointer-events: 0;
+    pointer-events: none;
 }
 
 
@@ -936,4 +937,31 @@ button.btn-Team.btn-success.btn-add:hover, button.btn-Team.btn-remove.btn-danger
 
 .glyphicon-minus:before {
   content: "\2212";
+}
+
+/* ------------ Modo de juego: RULETA --------- */
+.main-ruleta_mode {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+header.header-ruleta {
+    padding: 1rem;
+}
+header.header-ruleta h1 {
+    font-size: 3rem;
+    color: white;
+}
+.main-ruleta_mode.activeRuletaMode {
+    height: 100vh;
+    background: #FF7675;
+    opacity: 1;
+    pointer-events: auto;
+    display: block;
+}
+
+
+#idcanvas {
+    width: 81rem;
+    height: 81rem;
 }
