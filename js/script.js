@@ -81,6 +81,16 @@ exit_btn_classic.onclick = () => {
     info_box_classic.classList.remove("activeInfo"); //hide
 }
 
+continue_btn_classic.onclick = () => {
+    var win = window.open('https://juegosemat.herokuapp.com/', '_blank');
+    if (win) {
+        //Browser has allowed it to be opened
+        win.focus();
+    } else {
+        //Browser has blocked it
+        alert('Please allow popups for this website');
+    }
+}
 // --------- New ---------
 
 //If new button clicked
