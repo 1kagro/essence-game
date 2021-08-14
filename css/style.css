@@ -195,6 +195,14 @@ html {
     background: #227093;
 }
 
+.buttons button.imprimir {
+    color: #227093;
+}
+
+.buttons button.imprimir:hover {
+    color: #fff;
+    background: #227093;
+}
 .quiz-box {
     width: 55rem;
     background: #fff;

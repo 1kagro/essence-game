@@ -71,7 +71,7 @@ $user->setUser($userSession);
             <!-- New mode info-->
             <div class="info-box_ruleta" id="info-new">
                 <div class="info_title">
-                    <span>Some Rules of this Quiz</span>
+                    <span>Algunas reglas y recomendaciones</span>
                 </div>
                 <div class="info_list">
                     <div class="info">1. Tienes solo <span>15 seconds</span> por pregunta</div>
@@ -83,41 +83,41 @@ $user->setUser($userSession);
                     <div class="info">5. Diviertete :D</div>
                 </div>
                 <div class="buttons">
-                    <button class="quit">Exit Quiz</button>
+                    <button class="quit">Salir del Quiz</button>
                     <button class="restart">Continue</button>
                 </div>
             </div>
             <!-- Classic mode info-->
             <div class="info-box_ruleta" id="info-classic">
                 <div class="info_title">
-                    <span>Some Rules of this Quiz</span>
+                    <span>Algunas reglas y recomendaciones</span>
                 </div>
                 <div class="info_list">
-                    <div class="info">1. You will have only <span>60 seconds</span></div>
-                    <div class="info">2. Once you select your answer</div>
-                    <div class="info">3. You can't seect any option</div>
-                    <div class="info">4. You can't exit from the</div>
-                    <div class="info">5. You'll get points on the EugenioJotisimo</div>
+                    <div class="info">1. Será redireccionado a la pagina del juego original</span></div>
+                    <div class="info">2. El moderador podrá establecel el <span> tiempo </span> por pregunta</div>
+                    <div class="info">3. Una vez inicies tienes la opcion de abandonar cuando quieras</div>
+                    <div class="info">4. No ingreses nombres vacios</div>
+                    <div class="info">5. Vuelve pronto :D</div>
                 </div>
                 <div class="buttons">
-                    <button class="quit">Exit Quiz</button>
+                    <button class="quit">Salir del Quiz</button>
                     <button class="restart">Continue</button>
                 </div>
             </div>
             <!-- Ruleta mode info-->
             <div class="info-box_ruleta" id="info-ruleta">
                 <div class="info_title">
-                    <span>Some Rules of this Quiz</span>
+                    <span>Algunas reglas y recomendaciones</span>
                 </div>
                 <div class="info_list">
-                    <div class="info">1. You will have only fans</div>
-                    <div class="info">2. Once you select your answer</div>
-                    <div class="info">3. You can't seect any option</div>
-                    <div class="info">4. You can't exit from the</div>
-                    <div class="info">5. You'll get points on the EugenioJoto0</div>
+                    <div class="info">1. Puedes girar la ruleta las veces que quieras</div>
+                    <div class="info">2. El docente escogerá un estudiante al azar y este debe responder de forma escrita u oral</div>
+                    <div class="info">3. Diviertete :D</div>
+                    <!-- <div class="info">4. You can't exit from the</div>
+                    <div class="info">5. You'll get points on the EugenioJoto0</div> -->
                 </div>
                 <div class="buttons">
-                    <button class="quit">Exit Quiz</button>
+                    <button class="quit">Salir del Quiz</button>
                     <button class="restart">Continue</button>
                 </div>
             </div>
@@ -214,22 +214,7 @@ $user->setUser($userSession);
             </footer>
         </div>
     </div>
-    <div class="main-ruleta_mode">
-        <div class="container-ruleta">
-            <header class="header-ruleta">
-                <h1>Modo Ruleta</h1>
-            </header>
-            <div class="opciones-todas">
-                <canvas id="idcanvas"></canvas>
-            </div>
-            <footer>
-                <div class="total_que" id="total_que">
-                    <!-- <span><p>2</p>Of<p>5</p>Questions</span> -->
-                </div>
-                <button class="next_ruleta">Next Question</button>
-            </footer>
-        </div>
-    </div>
+    
     <!-- Result Box -->
     <div class="result_box">
         <div class="icon">
@@ -244,8 +229,9 @@ $user->setUser($userSession);
         <table class="table mx-auto table-bordered table-sm table-striped text-center" id="tablaResultados">
         </table>
         <div class="buttons">
-            <button class="restart">Replay Quiz</button>
-            <button class="quit">Quit Quiz</button>
+            <button class="imprimir">Imprimir</button>
+            <button class="restart">Repetir Quiz</button>
+            <button class="quit">Salir del Quiz</button>
         </div>
     </div>
 
