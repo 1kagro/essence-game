@@ -31,7 +31,7 @@ const option_list_cat = document.querySelector(".cat");
 
 const exit_btn_ruleta = info_box_ruleta.querySelector(".buttons .quit");
 const continue_btn_ruleta = info_box_ruleta.querySelector(".buttons .restart")
-const ruleta_mode_box = document.querySelector(".main-ruleta_mode");
+//const ruleta_mode_box = document.querySelector(".main-ruleta_mode");
 
 
 const exit_btn_classic = info_box_classic.querySelector(".buttons .quit");
@@ -45,6 +45,7 @@ const timeCount = new_mode_box.querySelector(".timer .timer_sec");
 const timeLine = new_mode_box.querySelector("header .time_line");
 const timeOff = new_mode_box.querySelector("header .time_tex");
 
+//const nombresEquipos;
 
 let puntajes_a = []
 let preguntas_hechass = []
@@ -64,9 +65,14 @@ exit_btn_ruleta.onclick = () => {
 }
 //If Continue button clicked
 continue_btn_ruleta.onclick = () => {
-    set_game_mode.style.display = "none";
-    info_box_ruleta.classList.remove("activeInfo");
-    ruleta_mode_box.classList.add("activeRuletaMode");
+    var win = window.open('./ruleta.php', '_self');
+    if (win) {
+        //Browser has allowed it to be opened
+        win.focus();
+    } else {
+        //Browser has blocked it
+        alert('Please allow popups for this website');
+    }
 }
 
 
@@ -279,10 +285,11 @@ function oprimir_btn(i) {
 }
 
 const next_btn = new_mode_box.querySelector(".next_btn");
-const next_ruleta = ruleta_mode_box.querySelector(".next_ruleta");
+//const next_ruleta = ruleta_mode_box.querySelector(".next_ruleta");
 const result_box = select_class(".result_box");
 const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
+const imprimir = result_box.querySelector(".buttons .imprimir");
 
 restart_quiz.onclick = () => {
     new_mode_box.classList.add("activeNewMode");
@@ -301,6 +308,8 @@ restart_quiz.onclick = () => {
     jugadaActual = {};
     jugadaActual.jugador = 1;
     //guardarConfiguracion();
+    guardarConfiguracion();
+    console.log("Vacios: Puntajes", puntajes_a, "scores: ", scores_a)
 
     timeOff.textContent = "Time Left";
     style("header").height = "14%"
@@ -327,6 +336,19 @@ restart_quiz.onclick = () => {
 quit_quiz.onclick = () => {
     //location.reload(true);
     window.location.href = window.location.href;
+}
+
+imprimir.onclick = () => {
+    let body = document.querySelector("body");
+    body.style.background = "white";
+    restart_quiz.style.display = "none";
+    quit_quiz.style.display = "none";
+    imprimir.style.display = "none";
+    window.print();
+    body.style.background = "#227093";
+    restart_quiz.style.display = "block";
+    quit_quiz.style.display = "block";
+    imprimir.style.display = "block";
 }
 
 // ----- Next Botton clicked -------
@@ -687,8 +709,8 @@ function guardarConfiguracion(){
 	console.log(equipos.length);
 	for (var i = 0; i < equipos.length; i++) {
 			configuracion.equipos.push(equipos[i].value);
-/*     	 	console.log("Valor equipos"+equipos[i].value);
-    	 	console.log("Valor json"+configuracion.equipos[i]); */
+    	 	console.log("Valor equipos"+equipos[i].value);
+    	 	console.log("Valor json"+configuracion.equipos[i]);
     }
    	serializado = JSON.stringify(configuracion);
 	/* console.log(serializado); */
@@ -817,7 +839,7 @@ function terminarJuego() {
 	document.getElementById("puntos-ganador").innerHTML = "<span>Es el equipo ganador con <p>" + Math.max.apply(null,scores_a) + "</p> puntos</span>";
 
 
-	var tabla = "<thead><tr><th>Nombre del equipp</th><th>Aciertos</th><th>Puntaje</th></tr></thead>";
+	var tabla = "<thead><tr><th>Nombre del equipo</th><th>Aciertos</th><th>Puntaje</th></tr></thead>";
     console.log("Preguntas", puntajesOrdenados, "scores", scoresOrdenados)
 	/* for (var i = 0; i < puntajes_a.length; i++) {
 		tabla = tabla + "<tr><td>"+configuracion.equipos[puntajes_orden.indexOf(puntajesOrdenados[i])]+"</td><td>"+orden_puntajes[i]+"</td><td>" + scoresOrdenados[i] + "</td></tr>";
