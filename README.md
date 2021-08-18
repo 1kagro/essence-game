@@ -8,4 +8,8 @@ Este prototipo de pagina web ha sido realizado con la finalidad de que los estud
 
 > El archivo *semat.sql*  contiene la base de datos del aplicativo, esta debe se importada de manera local.
 
+> Por defecto: 
+	Usuario: prueba4  
+	Contraseña: 123
+
 De Colombia con ❤ para el mundo
